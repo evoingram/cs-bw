@@ -65,6 +65,7 @@ function Blog(props) {
 					interim period, I am using placeholders for the calculated pieces of information and will sub those
 					out as I complete the code.  I picked out colors to go with my animated gradient background and added the actual blank canvas in a separate canvas component.
 				</p>
+				<p>This was a holiday weekend, so our build week, normally five days, was cut short to four days, and beacuse I still wanted to get five days in for the build week, I went ahead, got all nice and set up for Tuesday, when i will start working on the actual Game of Life part.  I've mostly got everything else set up, so I'm in a pretty good spot for tomorrow.</p>
 				<h2>Day 2: Tuesday</h2>
 				<h2>Day 3: Wednesday</h2>
 				<h2>Day 4: Thursday</h2>

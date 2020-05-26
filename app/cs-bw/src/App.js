@@ -26,7 +26,7 @@ const Div = styled.div`
 	animation: ${smoothRide} 17s ease infinite;
 	color: white;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	margin-top: -2.1%;
+	margin-top: -1.5%;
 `;
 
 const FlexContainer = styled.div`

@@ -26,16 +26,16 @@ function PSButtons() {
 	return (
 		<Div>
 			<Button id="PS1">
-				<h4>Preset 1</h4>
+				<h4>Glider</h4>
 			</Button>
 			<Button id="PS2">
-				<h4>Preset 2</h4>
+				<h4>Beacon</h4>
 			</Button>
 			<Button id="PS3">
-				<h4>Preset 3</h4>
+				<h4>Pulsar</h4>
 			</Button>
 			<Button id="PS4">
-				<h4>Preset 4</h4>
+				<h4>Random</h4>
 			</Button>
 			<Button id="PS5">
 				<h4>Toggle Grid Size: 25x25</h4>
