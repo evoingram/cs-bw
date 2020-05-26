@@ -20,10 +20,10 @@ const smoothRide = keyframes`
 const Div = styled.div`
 	background: linear-gradient(275deg, #642b73, #c6426e);
 	background-size: 400% 400%;
-	-webkit-animation: ${smoothRide} 17s ease infinite;
-	-moz-animation: ${smoothRide} 17s ease infinite;
-	-o-animation: ${smoothRide} 17s ease infinite;
-	animation: ${smoothRide} 17s ease infinite;
+	-webkit-animation: ${smoothRide} 10s ease infinite;
+	-moz-animation: ${smoothRide} 10s ease infinite;
+	-o-animation: ${smoothRide} 10s ease infinite;
+	animation: ${smoothRide} 10s ease infinite;
 	color: white;
 	margin-top: -1.5%;
 	@font-face {

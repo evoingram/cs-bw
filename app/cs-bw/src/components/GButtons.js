@@ -22,7 +22,6 @@ const Div = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
-	margin-top: 3%;
 `
 const H4 = styled.h4`
 	margin-top: 5%;
