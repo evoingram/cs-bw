@@ -16,6 +16,9 @@ const Button = styled.button`
 	font-size: 1.25rem;
 	padding-left: 3%;
 	padding-right: 3%;
+	&:hover {
+		background-color: #642b73;
+	}
 `;
 const Div = styled.div`
 	display: flex;

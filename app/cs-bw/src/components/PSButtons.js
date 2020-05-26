@@ -25,6 +25,9 @@ const Button = styled.button`
 	}
 	font-family: 'Roboto', monospace;
 	font-size: 1.25rem;
+	&:hover {
+		background-color: #642b73;
+	}
 `;
 const H4 = styled.h4`
 	margin-top: 5%;

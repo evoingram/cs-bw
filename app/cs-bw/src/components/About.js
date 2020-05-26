@@ -10,6 +10,9 @@ const Button = styled.button`
 	border-radius: 8px;
 	padding-left: 1%;
 	padding-right: 1%;
+	&:hover {
+		background-color: #642b73;
+	}
 `;
 
 const Div = styled.div`
