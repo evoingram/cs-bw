@@ -27,6 +27,10 @@ const Button = styled.button`
 	font-family: 'Roboto', monospace;
 	font-size: 1.25rem;
 `;
+const H4 = styled.h4`
+	margin-top: 5%;
+	margin-bottom: 5%;
+`;
 
 /*
 font-family: 'Caveat', cursive;
@@ -50,19 +54,22 @@ function PSButtons() {
 	return (
 		<Div>
 			<Button id="PS1">
-				<h4>Glider</h4>
+				<H4>Glider</H4>
 			</Button>
 			<Button id="PS2">
-				<h4>Beacon</h4>
+				<H4>Beacon</H4>
 			</Button>
 			<Button id="PS3">
-				<h4>Pulsar</h4>
+				<H4>Pulsar</H4>
 			</Button>
 			<Button id="PS4">
-				<h4>Random</h4>
+				<H4>Random</H4>
 			</Button>
 			<Button id="PS5">
-				<h4>Toggle Grid Size: 25x25</h4>
+				<H4>Toggle Grid Size: 25x25</H4>
+			</Button>
+			<Button id="PS5">
+				<H4>3D Version</H4>
 			</Button>
 		</Div>
 	);

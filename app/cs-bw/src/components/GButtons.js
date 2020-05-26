@@ -24,27 +24,32 @@ const Div = styled.div`
 	justify-content: space-evenly;
 	margin-top: 3%;
 `
+const H4 = styled.h4`
+	margin-top: 5%;
+	margin-bottom: 5%;
+`;
+
 
 function GButtons() {
 	return (
 		<div>
-		<Div>
-			<Button id="GB1">
-				<h4>Play</h4>
-			</Button>
-			<Button id="GB2">
-				<h4>Pause</h4>
-			</Button>
-			<Button id="GB3">
-				<h4>Stop</h4>
-			</Button>
-			<Button id="GB4">
-				<h4>Next</h4>
-			</Button>
-			<Button id="GB5">
-				<h4>Clear</h4>
-			</Button>
-		</Div>
+			<Div>
+				<Button id="GB1">
+					<H4>Play</H4>
+				</Button>
+				<Button id="GB2">
+					<H4>Pause</H4>
+				</Button>
+				<Button id="GB3">
+					<H4>Stop</H4>
+				</Button>
+				<Button id="GB4">
+					<H4>Next</H4>
+				</Button>
+				<Button id="GB5">
+					<H4>Clear</H4>
+				</Button>
+			</Div>
 		</div>
 	);
 }
