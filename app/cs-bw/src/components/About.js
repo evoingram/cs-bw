@@ -39,12 +39,12 @@ const Div2 = styled.div`
 `;
 const H4 = styled.h4`
 	@font-face {
-		font-family: 'Oxanium';
+		font-family: 'Roboto';
 		font-style: normal;
 		font-weight: 400;
-		src: local('Oxanium'), local('Oxanium-Regular'), url('../fonts/Oxanium-Regular.ttf') format('ttf');
+		src: local('Roboto'), local('RobotoMono-Regular'), url('./fonts/RobotoMono-Regular.ttf') format('ttf');
 	}
-	font-family: 'Oxanium', cursive;
+	font-family: 'Roboto', monospace;
 	font-size: 1rem;
 `;
 
