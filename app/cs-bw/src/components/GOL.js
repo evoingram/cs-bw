@@ -10,7 +10,7 @@ class GOL extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            isRunning: false,
+            running: false,
             canvasGrid: [],
             cWidth: 0,
             cHeight: 0,
@@ -29,6 +29,19 @@ class GOL extends React.Component {
         let boxWidth = cWidth / 25;
         let boxHeight = cHeight / 25;
 
+        for (let x = 0; x <= cWidth; x += boxWidth) {
+			for (let y = 0; y <= cHeight; y += boxHeight) {
+				cContext.moveTo(x, 0);
+				cContext.lineTo(x, cHeight);
+				cContext.stroke();
+				cContext.moveTo(0, y);
+				cContext.lineTo(cWidth, y);
+                cContext.stroke();
+                cContext.fillStyle = `rgb(41, 88, 170)`;
+                cContext.fillRect(x, y, boxWidth, boxHeight);
+			}
+        }
+        
         let imageData = cContext.getImageData(0, 0, cWidth, cHeight);
 
         // Here is the screen buffer array we can manipulate:
@@ -46,23 +59,13 @@ class GOL extends React.Component {
 
         cContext.putImageData(imageData, 0, 0);
 
-        for (let x = 0; x <= cWidth; x += boxWidth) {
-			for (let y = 0; y <= cHeight; y += boxHeight) {
-				cContext.moveTo(x, 0);
-				cContext.lineTo(x, cHeight);
-				cContext.stroke();
-				cContext.moveTo(0, y);
-				cContext.lineTo(cWidth, y);
-				cContext.stroke();
-			}
-		}
-
-        this.setState({
-        grid: canvasGrid,
-        width: boxWidth,
-        height: boxHeight
-        });
-        // , this.updateCanvas(canvasGrid)
+        /*
+            this.setState({
+                canvasGrid: canvasGrid,
+                cWidth: boxWidth,
+                cHeight: boxHeight
+            });
+        */
     }
 
     
