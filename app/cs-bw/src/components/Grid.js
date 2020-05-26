@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Route, Switch, Link } from 'react-router-dom';
 import GButtons from "./GButtons";
+import GOL from './GOL';
 
 const Div = styled.div`
 	display: flex;
@@ -18,6 +19,7 @@ function Grid() {
 		<Div1>
 			<h1>Generation ##</h1>
 			<Div>
+				<GOL />
 				<GButtons />
 			</Div>
 		</Div1>

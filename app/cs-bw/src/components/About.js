@@ -33,7 +33,7 @@ function About(props) {
 			<Div>
 				<Link to="/blog">
 					<Button id="blog" onClick={toggleBlogPost}>
-						<h4>Click here for my step-by-step in-depth guide.</h4>
+						<h4>Read my step-by-step in-depth guide.</h4>
 					</Button>
 				</Link>
 				<h1>About This Project</h1>
@@ -105,7 +105,6 @@ function About(props) {
 						A cellular automaton is a discrete model studied in "automata theory", a regular grid of cells, each
 						cell in one of a finite number of states. The grid can be any finite number of dimensions. Cellular
 						automata are also known as cellular spaces, cellular structures, and iterative arrays.
-						ABOUT COMPONENT
 				</p>
 				</Div2>
 			</Div>

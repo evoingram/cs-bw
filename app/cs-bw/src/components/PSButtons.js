@@ -5,7 +5,7 @@ import { Route, Switch, Link } from 'react-router-dom';
 const Button = styled.button`
 	background-color: #c6426e;
 	color: white;
-	max-width: 100%;
+	max-width: 80%;
 	min-width: 90%;
 	border: 3px solid white;
 	border-radius: 8px;
@@ -25,18 +25,21 @@ const Div = styled.div`
 function PSButtons() {
 	return (
 		<Div>
-				<Button id="PS1">
-					<h4>Preset 1</h4>
-				</Button>
-				<Button id="PS2">
-					<h4>Preset 2</h4>
-				</Button>
-				<Button id="PS3">
-					<h4>Preset 3</h4>
-				</Button>
-				<Button id="PS4">
-					<h4>Preset 4</h4>
-				</Button>
+			<Button id="PS1">
+				<h4>Preset 1</h4>
+			</Button>
+			<Button id="PS2">
+				<h4>Preset 2</h4>
+			</Button>
+			<Button id="PS3">
+				<h4>Preset 3</h4>
+			</Button>
+			<Button id="PS4">
+				<h4>Preset 4</h4>
+			</Button>
+			<Button id="PS5">
+				<h4>Toggle Grid Size: 25x25</h4>
+			</Button>
 		</Div>
 	);
 }

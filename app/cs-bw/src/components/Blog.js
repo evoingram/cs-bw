@@ -39,9 +39,9 @@ function Blog(props) {
 			<Div2>
 				<h2>Day 1: Monday</h2>
 				<p>
-					This project was assigned to us as our build-week assignment for Lambda School's computer science
-					first unit. This post is intended to describe how I built this project. The steps I took are the
-					following.
+					This project was assigned to us as our build-week assignment for Lambda School's first unit of
+					computer science. This post is intended to describe how I built this project. The steps I took are
+					the following.
 				</p>
 				<p>
 					First, of course, I did some research to learn what Conway's Game of Life (CGOL) actually is, how it
