@@ -47,7 +47,7 @@ function Blog(props) {
 					First, of course, I did some research to learn what Conway's Game of Life (CGOL) actually is, how it
 					works, its rules, and why it's useful as well as, relatedly, what are cellular automata, how are
 					they useful in real life. Then we were also asked to correctly analyze the Turing completeness of
-					CGOL.  I researched how to work with canvas and how to render multiple components.
+					CGOL. I researched how to work with canvas and how to render multiple components.
 				</p>
 				<p>
 					Second, I took the rubric and the goals and made my own readme, including an evolving task list, to
@@ -63,13 +63,23 @@ function Blog(props) {
 					Then I used the provided or suggested wireframe to build the UI, what would house the CGOL, but
 					added my own stylings to be much more interesting than just a black-and-white rendering. For the
 					interim period, I am using placeholders for the calculated pieces of information and will sub those
-					out as I complete the code.  I picked out colors to go with my animated gradient background and added the actual blank canvas in a separate canvas component.
+					out as I complete the code. I picked out colors to go with my animated gradient background and added
+					the actual blank canvas in a separate canvas component.
 				</p>
-				<p>This was a holiday weekend, so our build week, normally five days, was cut short to four days, and beacuse I still wanted to get five days in for the build week, I went ahead, got all nice and set up for Tuesday, when i will start working on the actual Game of Life part.  I've mostly got everything else set up, so I'm in a pretty good spot for tomorrow.</p>
+				<p>
+					This was a holiday weekend, so our build week, normally five days, was cut short to four days, and
+					beacuse I still wanted to get five days in for the build week, I went ahead, got all nice and set up
+					for Tuesday, when i will start working on the actual Game of Life part. I've mostly got everything
+					else set up, so I'm in a pretty good spot for tomorrow.
+				</p>
 				<h2>Day 2: Tuesday</h2>
+				<p></p>
 				<h2>Day 3: Wednesday</h2>
+				<p></p>
 				<h2>Day 4: Thursday</h2>
+				<p></p>
 				<h2>Day 5: Friday</h2>
+				<p></p>
 			</Div2>
 		</div>
 	);
