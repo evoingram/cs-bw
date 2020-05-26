@@ -1,14 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Route, Switch, Link } from 'react-router-dom';
+import GButtons from "./GButtons";
 
+const Div = styled.div`
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	max-width: 100%;
+	justify-content: center;
+`;
+const Div1 = styled.div`
+	text-align: center;
+`
 function Grid() {
 	return (
-		<div>
-			<header>
-				<p>GRID COMPONENT</p>
-			</header>
-		</div>
+		<Div1>
+			<h1>Generation ##</h1>
+			<Div>
+				<GButtons />
+			</Div>
+		</Div1>
 	);
 }
 

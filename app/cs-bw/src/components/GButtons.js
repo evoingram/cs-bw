@@ -12,7 +12,8 @@ const Button = styled.button`
 `;
 const Div = styled.div`
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
+	justify-content: space-evenly;
 `
 
 function GButtons() {
@@ -29,6 +30,9 @@ function GButtons() {
 			</Button>
 			<Button id="GB4">
 				<h4>Next</h4>
+			</Button>
+			<Button id="GB5">
+				<h4>Clear Grid</h4>
 			</Button>
 		</Div>
 	);
