@@ -9,7 +9,8 @@ const Button = styled.button`
 	max-width: 100%;
 	border: 3px solid white;
 	border-radius: 8px;
-	padding: 3%;
+	padding-left: 1%;
+	padding-right: 1%;
 `;
 
 const Div = styled.div`
@@ -18,10 +19,33 @@ const Div = styled.div`
 	padding: 2%;
 `;
 
+/*
+font-family: 'Caveat', cursive;
+font-family: 'Oxanium', cursive;
+font-family: 'Roboto Mono', monospace;
+*/
 
 const Div2 = styled.div`
 	justify-content: left;
 	text-align: left;
+	@font-face {
+		font-family: 'Oxanium';
+		font-style: normal;
+		font-weight: 400;
+		src: local('Oxanium'), local('Oxanium-Regular'), url('../fonts/Oxanium-Regular.ttf') format('ttf');
+	}
+	font-family: 'Oxanium', cursive;
+	font-size: 1rem;
+`;
+const H4 = styled.h4`
+	@font-face {
+		font-family: 'Oxanium';
+		font-style: normal;
+		font-weight: 400;
+		src: local('Oxanium'), local('Oxanium-Regular'), url('../fonts/Oxanium-Regular.ttf') format('ttf');
+	}
+	font-family: 'Oxanium', cursive;
+	font-size: 1rem;
 `;
 
 function About(props) {
@@ -33,7 +57,7 @@ function About(props) {
 			<Div>
 				<Link to="/blog">
 					<Button id="blog" onClick={toggleBlogPost}>
-						<h4>Read my step-by-step in-depth guide.</h4>
+						<H4>Read my step-by-step in-depth guide.</H4>
 					</Button>
 				</Link>
 				<h1>About This Project</h1>

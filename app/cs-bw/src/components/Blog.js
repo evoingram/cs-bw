@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Route, Switch, Link } from 'react-router-dom';
 import App from '../App';
 import About from './About';
+import '../App.css';
 
 const Button = styled.button`
 	background-color: #c6426e;
@@ -10,14 +11,37 @@ const Button = styled.button`
 	max-width: 100%;
 	border: 3px solid white;
 	border-radius: 8px;
-	padding: 3%;
+	padding-left: 1%;
+	padding-right: 1%;
 `;
 
 const Div2 = styled.div`
+	@font-face {
+	font-family: 'Caveat';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Caveat'), local('Caveat-Regular'), url('../fonts/Caveat-Regular.ttf') format('ttf');
+	}
 	justify-content: left;
 	text-align: left;
+  	font-family: 'Caveat', cursive;
 `
 
+const H4 = styled.h4`
+	@font-face {
+		font-family: 'Oxanium';
+		font-style: normal;
+		font-weight: 400;
+		src: local('Oxanium'), local('Oxanium-Regular'), url('../fonts/Oxanium-Regular.ttf') format('ttf');
+	}
+	font-family: 'Oxanium', cursive;
+	font-size: 1rem;
+`;
+/*
+font-family: 'Caveat', cursive;
+font-family: 'Oxanium', cursive;
+font-family: 'Roboto Mono', monospace;
+*/
 
 function Blog(props) {
 
@@ -30,7 +54,7 @@ function Blog(props) {
 			<Route>
 				<Link to="/blog">
 					<Button id="blog" onClick={toggleBlogPost}>
-						<h4>Learn more about Conway's Game of Life.</h4>
+						<H4>Learn more about Conway's Game of Life.</H4>
 					</Button>
 				</Link>
 			</Route>

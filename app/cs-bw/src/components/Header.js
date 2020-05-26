@@ -10,10 +10,8 @@ const Div = styled.div`
 function Header() {
 	return (
 		<Div>
-			<header>
-				<h1>Conway's Game of Life</h1>
-				<h2>By Erica L. Ingram</h2>
-			</header>
+			<h1>Conway's Game of Life</h1>
+			<h2>By Erica L. Ingram</h2>
 		</Div>
 	);
 }

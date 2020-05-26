@@ -25,30 +25,51 @@ const Div = styled.div`
 	-o-animation: ${smoothRide} 17s ease infinite;
 	animation: ${smoothRide} 17s ease infinite;
 	color: white;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	margin-top: -1.5%;
+	@font-face {
+		font-family: 'Roboto';
+		font-style: normal;
+		font-weight: 400;
+		src: local('Roboto'), local('RobotoMono-Regular'), url('./fonts/RobotoMono-Regular.ttf') format('ttf');
+	}
+	font-family: 'Roboto', monospace;
 `;
 
 const FlexContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
-  padding: 3%;
+  padding: 1%;
 `;
 const FlexSubContainers1 = styled.div`
-  padding: 3%;
-  min-width: 50%;
+  padding: 1%;
+  min-width: 775px;
 	border: 1px solid black;
 `;
 const FlexSubContainers2 = styled.div`
-  padding: 2%;
+  padding: 0.5%;
   max-width: 15%;
 `;
 const FlexSubContainers3 = styled.div`
-  padding: 2%;
+  padding: 0.5%;
   max-width: 18%;
 `;
+/*
+font-family: 'Caveat', cursive;
+font-family: 'Oxanium', cursive;
+font-family: 'Roboto Mono', monospace;
 
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('RobotoMono-Regular'), url('./fonts/RobotoMono-Regular.ttf') format('ttf');
+}
+
+html {
+  font-family: 'Roboto', monospace;
+}
+*/
 
 function App() {
   return (
