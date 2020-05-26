@@ -5,7 +5,8 @@ function Header() {
 	return (
 		<div className="App">
 			<header className="App-header">
-				<p>HEADER COMPONENT</p>
+				<h1>Conway's Game of Life</h1>
+				<h2>By Erica L. Ingram</h2>
 			</header>
 		</div>
 	);
