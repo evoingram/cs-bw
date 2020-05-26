@@ -47,7 +47,7 @@ function Blog(props) {
 					First, of course, I did some research to learn what Conway's Game of Life (CGOL) actually is, how it
 					works, its rules, and why it's useful as well as, relatedly, what are cellular automata, how are
 					they useful in real life. Then we were also asked to correctly analyze the Turing completeness of
-					CGOL.
+					CGOL.  I researched how to work with canvas and how to render multiple components.
 				</p>
 				<p>
 					Second, I took the rubric and the goals and made my own readme, including an evolving task list, to

@@ -30,6 +30,11 @@ class GOL extends React.Component {
         let boxWidth = cWidth / 25;
         let boxHeight = cHeight / 25;
 
+        let imageData = cContext.getImageData(0, 0, cWidth, cHeight);
+
+        // Here is the screen buffer array we can manipulate:
+        let screenBuffer = imageData.data;
+        
     };
     
     render() {
