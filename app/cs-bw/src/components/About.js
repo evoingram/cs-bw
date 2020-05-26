@@ -19,6 +19,10 @@ const Div = styled.div`
 `;
 
     
+const Div2 = styled.div`
+	justify-content: left;
+	text-align: left;
+`;
 
 function About(props) {
 	function toggleBlogPost() {
@@ -36,6 +40,7 @@ function About(props) {
 					</Link>
 				<h1>About This Project</h1>
 				<h2>Conway's Game of Life</h2>
+			<Div2>
 				<h3>About Conway's Game of Life</h3>
 				<p>
 					Conway's Game of Life was invented in 1970 by John H. Conway. His initial goal was to "define an
@@ -95,12 +100,15 @@ function About(props) {
 					branch-if-zero instruction and, two, the ability to change an arbitrary amount of memory, a.k.a.
 					maintain an arbitrary number of data items.
 				</p>
+			</Div2>
 				<h2>Cellular Automata</h2>
+			<Div2>
 				<p>
 					A cellular automaton is a discrete model studied in "automata theory", a regular grid of cells, each
 					cell in one of a finite number of states. The grid can be any finite number of dimensions. Cellular
 					automata are also known as cellular spaces, cellular structures, and iterative arrays.
 				</p>
+			</Div2>
 			</header>
 		</div>
 	);

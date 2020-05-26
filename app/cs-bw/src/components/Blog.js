@@ -13,6 +13,11 @@ const Button = styled.button`
 	padding: 3%;
 `;
 
+const Div2 = styled.div`
+	justify-content: left;
+	text-align: left;
+`
+
 
 function Blog(props) {
 
@@ -22,15 +27,16 @@ function Blog(props) {
 	
 	return (
 		<div>
-				<Route>
-					<Link to="/blog">
-						<Button id="blog" onClick={toggleBlogPost}>
-							<h4>Learn more about Conway's Game of Life.</h4>
-						</Button>
-					</Link>
+			<Route>
+				<Link to="/blog">
+					<Button id="blog" onClick={toggleBlogPost}>
+						<h4>Learn more about Conway's Game of Life.</h4>
+					</Button>
+				</Link>
 			</Route>
-			
-				<h1>About This Project's Development</h1>
+
+			<h1>About This Project's Development</h1>
+			<Div2>
 				<h2>Day 1: Monday</h2>
 				<p>
 					This project was assigned to us as our build-week assignment for Lambda School's computer science
@@ -63,6 +69,7 @@ function Blog(props) {
 				<h2>Day 3: Wednesday</h2>
 				<h2>Day 4: Thursday</h2>
 				<h2>Day 5: Friday</h2>
+			</Div2>
 		</div>
 	);
 }

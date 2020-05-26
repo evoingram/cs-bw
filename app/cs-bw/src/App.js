@@ -37,17 +37,16 @@ const FlexContainer = styled.div`
 `;
 const FlexSubContainers1 = styled.div`
   padding: 3%;
+  min-width: 50%;
 	border: 1px solid black;
 `;
 const FlexSubContainers2 = styled.div`
-	padding: 3%;
-	max-width: 15%;
-	border: 1px solid black;
+  padding: 2%;
+  max-width: 15%;
 `;
 const FlexSubContainers3 = styled.div`
-  padding: 3%;
-  max-width: 25%;
-  border: 1px solid black;
+  padding: 2%;
+  max-width: 18%;
 `;
 
 
