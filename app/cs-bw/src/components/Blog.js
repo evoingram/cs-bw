@@ -71,7 +71,7 @@ function Blog(props) {
 					First, of course, I did some research to learn what Conway's Game of Life (CGOL) actually is, how it
 					works, its rules, and why it's useful as well as, relatedly, what are cellular automata, how are
 					they useful in real life. Then we were also asked to correctly analyze the Turing completeness of
-					CGOL. I researched how to work with canvas and how to render multiple components.
+					CGOL. I researched how to work with canvas and how to render multiple components.  I took handwritten notes on all of it for purposes of additional repetition.
 				</p>
 				<p>
 					Second, I took the rubric and the goals and made my own readme, including an evolving task list, to
@@ -97,7 +97,9 @@ function Blog(props) {
 					else set up, so I'm in a pretty good spot for tomorrow.
 				</p>
 				<h2>Day 2: Tuesday</h2>
-				<p>I incorporated three fonts into the UI before I started in on the grid/algorithm portions of this project.  I selected a handwriting-style font for the blog post, a computer-looking or style font for the default, and a second handwriting-style font for the about portion.  I might change the second one before this is complete; it looks a little like Comic Sans now that I've got it installed.</p>
+				<p>
+					I incorporated three fonts into the UI before I started in on the grid/algorithm portions of this project.  I selected a handwriting-style font for the blog post, a computer-looking or style font for the default, and a second handwriting-style font for the about portion.  I might change the second one before this is complete; it looks a little like Comic Sans now that I've got it installed.
+				</p>
 				<p></p>
 				<h2>Day 3: Wednesday</h2>
 				<p></p>
