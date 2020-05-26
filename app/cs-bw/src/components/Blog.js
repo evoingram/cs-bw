@@ -97,6 +97,7 @@ function Blog(props) {
 					else set up, so I'm in a pretty good spot for tomorrow.
 				</p>
 				<h2>Day 2: Tuesday</h2>
+				<p>I incorporated three fonts into the UI before I started in on the grid/algorithm portions of this project.  I selected a handwriting-style font for the blog post, a computer-looking or style font for the default, and a second handwriting-style font for the about portion.  I might change the second one before this is complete; it looks a little like Comic Sans now that I've got it installed.</p>
 				<p></p>
 				<h2>Day 3: Wednesday</h2>
 				<p></p>
