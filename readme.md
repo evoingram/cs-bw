@@ -5,18 +5,18 @@
 ### Things To Do
 
 - [X] describe rules of game of life
-- [ ] describe what are cellular automata
-- [ ] describe how are celullar automata useful IRL
-- [ ] correctly analyze "Turing Completeness" of Conway's Game of Life
+- [X] describe what are cellular automata
+- [X] describe how are celullar automata useful IRL
+- [X] correctly analyze "Turing Completeness" of Conway's Game of Life
 - [ ] how-to guide or blog post to walk through what you did to implement your project
 - [ ] set up UI for game
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
 - [ ] 
 
 ### Specs & Requirements
@@ -74,5 +74,5 @@ The main entry point of your application should house the visualization of this 
 - [ ] TWO:  Display includes working buttons that start / stop the animation and clear the grid
 - [ ] TWO:  Algorithm to generate new generations of cells correctly implemented
 - [ ] TWO:  At least 3 features from Custom Features section successfully implemented
-- [ ] TWO:  Application includes a section outlining the rules to Conway's "Game of Life"
+- [X] TWO:  Application includes a section outlining the rules to Conway's "Game of Life"
 - [ ] THREE:  satisfies at least ONE of the stretch goals

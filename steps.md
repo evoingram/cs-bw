@@ -10,7 +10,7 @@ Second, I took the rubric and the goals and made my own readme, including an evo
 
 After that, I actually wrote the 'rules' and 'about' portions of this project.  This gave me directional clarity in terms of what to do and what my overall goal was.
 
-Then I used the provided or suggested wireframe to build the UI, what would house the CGOL, but added my own stylings to be much more interesting than just a black-and-white rendering.
+Then I used the provided or suggested wireframe to build the UI, what would house the CGOL, but added my own stylings to be much more interesting than just a black-and-white rendering.  For the interim period, I am using placeholders for the calculated pieces of information and will sub those out as I complete the code.
 
 ## Day 2:  Tuesday
 
