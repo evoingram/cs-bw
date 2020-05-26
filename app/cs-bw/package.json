@@ -1,7 +1,7 @@
 {
-  "name": "Erica Ingram's Conway's Game of Life",
+  "name": "Game of Life by Erica Ingram",
   "version": "0.1.0",
-	"description": "Conway's Game of Life app",
+	"description": "Game of Life app",
 	"repository": "https://github.com/evoingram/cs-bw",
 	"author": "Erica L. Ingram <evoingram@aquoco.onmicrosoft.com> (https://elicgol.now.sh/)",
   "private": true,
