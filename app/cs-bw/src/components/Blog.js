@@ -63,7 +63,7 @@ function Blog(props) {
 					Then I used the provided or suggested wireframe to build the UI, what would house the CGOL, but
 					added my own stylings to be much more interesting than just a black-and-white rendering. For the
 					interim period, I am using placeholders for the calculated pieces of information and will sub those
-					out as I complete the code.
+					out as I complete the code.  I picked out colors to go with my animated gradient background and added the actual blank canvas in a separate canvas component.
 				</p>
 				<h2>Day 2: Tuesday</h2>
 				<h2>Day 3: Wednesday</h2>

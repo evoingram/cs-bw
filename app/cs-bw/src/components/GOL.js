@@ -18,6 +18,8 @@ class GOL extends React.Component {
             currentGeneration: 0
         };
     }
+    
+    // Colors:  #2958AA (blue), #4E8A63 (green), #642B73 (purple), #C6426E (pink)
 
     componentDidMount() {
         let boxes = new Array(255).fill(0);
@@ -33,7 +35,7 @@ class GOL extends React.Component {
     render() {
         return (
             <div>
-                <Canvas id="canvas" ref="canvas" width="725" height="550"></Canvas>
+                <Canvas id="canvas" ref="canvas" width="750" height="650"></Canvas>
             </div>
         );
     }
