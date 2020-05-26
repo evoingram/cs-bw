@@ -1,5 +1,8 @@
-import React from 'react';
+
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useAnimeFrame } from '../customHooks/useAnimeFrame.js';
+import moment from 'moment';
 
 const Canvas = styled.canvas`
     border: 1px solid black;
@@ -37,14 +40,21 @@ class GOL extends React.Component {
 				cContext.moveTo(0, y);
 				cContext.lineTo(cWidth, y);
                 cContext.stroke();
-                cContext.fillStyle = `rgb(41, 88, 170)`;
-                cContext.fillRect(x, y, boxWidth, boxHeight);
+                // if cell is alive/dead 
+                if (x === 720 & y === 390) { 
+                    cContext.fillStyle = `rgb(78, 138, 99)`;
+                    cContext.fillRect(x, y, boxWidth, boxHeight);
+
+                }
+                else{
+                    cContext.fillStyle = `rgb(41, 88, 170)`;
+                    cContext.fillRect(x, y, boxWidth, boxHeight);
+                }
 			}
         }
         
         let imageData = cContext.getImageData(0, 0, cWidth, cHeight);
 
-        // Here is the screen buffer array we can manipulate:
         let screenBuffer = imageData.data;
                 
         let x = 10,
@@ -52,9 +62,9 @@ class GOL extends React.Component {
         
         let index = (y * cWidth + x) * 4;
 
-        screenBuffer[index + 0] = 0x29; // Red
-        screenBuffer[index + 1] = 0x58; // Green
-        screenBuffer[index + 2] = 0xaa; // Blue
+        screenBuffer[index + 0] = 0x4e; // Red
+        screenBuffer[index + 1] = 0x8a; // Green
+        screenBuffer[index + 2] = 0x63; // Blue
         screenBuffer[index + 3] = 0xff; // Alpha
 
         cContext.putImageData(imageData, 0, 0);
