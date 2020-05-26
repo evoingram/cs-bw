@@ -5,6 +5,7 @@
 ### Next Steps
 
 - [ ] day 2 blog post
+- [ ] add button hover color (purple)
 - [ ] make grid 25x25 AND adjustable to 4-5 different sizes
   - [ ] each cell clickable while NOT running
   - [ ] not clickable while running
