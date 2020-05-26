@@ -1,17 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Route, Switch, Link } from 'react-router-dom';
+import Blog from './Blog';
+import About from './About';
 
+
+const Div = styled.div`
+	justify-content: center;
+	text-align: center;
+	padding: 2%;
+`;
+
+	
 function Footer() {
+
+	const [toggleBlog, setToggleBlog] = useState(false);
+
 	return (
-		<div>
-			<header>
-				<Link to="/blog">
-					<Button id="blog">Click here for a step-by-step in-depth guide for how I built this project.</Button>
-				</Link>
-				<p>FOOTER COMPONENT</p>
-			</header>
-		</div>
+		(!toggleBlog && (
+			<Div>
+				<header>
+					<About toggleBlog={toggleBlog} setToggleBlog={setToggleBlog} />
+				</header>
+			</Div>
+		)) ||
+		(toggleBlog && (
+			<Div>
+				<header>
+					<Blog toggleBlog={toggleBlog} setToggleBlog={setToggleBlog} />
+				</header>
+			</Div>
+		))
 	);
 }
 

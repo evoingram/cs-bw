@@ -1,11 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Route, Switch, Link } from 'react-router-dom';
+import App from '../App';
+import About from './About';
 
-function Blog() {
+const Button = styled.button`
+	background-color: #c6426e;
+	color: white;
+	max-width: 100%;
+	border: 3px solid white;
+	border-radius: 8px;
+	padding: 3%;
+`;
+
+
+function Blog(props) {
+
+	function toggleBlogPost() {
+		props.setToggleBlog(false);
+	};
+	
 	return (
 		<div>
-			<header>
+				<Route>
+					<Link to="/blog">
+						<Button id="blog" onClick={toggleBlogPost}>
+							<h4>Learn more about Conway's Game of Life.</h4>
+						</Button>
+					</Link>
+			</Route>
+			
 				<h1>About This Project's Development</h1>
 				<h2>Day 1: Monday</h2>
 				<p>
@@ -39,7 +63,6 @@ function Blog() {
 				<h2>Day 3: Wednesday</h2>
 				<h2>Day 4: Thursday</h2>
 				<h2>Day 5: Friday</h2>
-			</header>
 		</div>
 	);
 }
