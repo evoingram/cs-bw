@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route, Switch, Link } from 'react-router-dom';
 
 const Canvas = styled.canvas`
     border: 1px solid black;
@@ -22,7 +21,7 @@ class GOL extends React.Component {
     // Colors:  #2958AA (blue), #4E8A63 (green), #642B73 (purple), #C6426E (pink)
 
     componentDidMount() {
-        let boxes = new Array(255).fill(0);
+        let canvasGrid = new Array(255).fill(0);
         let actualCanvas = this.refs.canvas;
         let cContext = actualCanvas.getContext('2d');
         let cWidth = cContext.canvas.width;
@@ -34,8 +33,38 @@ class GOL extends React.Component {
 
         // Here is the screen buffer array we can manipulate:
         let screenBuffer = imageData.data;
+                
+        let x = 10,
+            y = 20;
         
-    };
+        let index = (y * cWidth + x) * 4;
+
+        screenBuffer[index + 0] = 0x29; // Red
+        screenBuffer[index + 1] = 0x58; // Green
+        screenBuffer[index + 2] = 0xaa; // Blue
+        screenBuffer[index + 3] = 0xff; // Alpha
+
+        cContext.putImageData(imageData, 0, 0);
+
+        for (let x = 0; x <= cWidth; x += boxWidth) {
+			for (let y = 0; y <= cHeight; y += boxHeight) {
+				cContext.moveTo(x, 0);
+				cContext.lineTo(x, cHeight);
+				cContext.stroke();
+				cContext.moveTo(0, y);
+				cContext.lineTo(cWidth, y);
+				cContext.stroke();
+			}
+		}
+
+        this.setState({
+        grid: canvasGrid,
+        width: boxWidth,
+        height: boxHeight
+        });
+        // , this.updateCanvas(canvasGrid)
+    }
+
     
     render() {
         return (

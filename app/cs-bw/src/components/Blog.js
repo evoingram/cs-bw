@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route, Switch, Link } from 'react-router-dom';
-import App from '../App';
-import About from './About';
+import { Route, Link } from 'react-router-dom';
 import '../App.css';
 
 const Button = styled.button`

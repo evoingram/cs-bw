@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route, Switch, Link } from 'react-router-dom';
 import GButtons from "./GButtons";
 import GOL from './GOL';
 

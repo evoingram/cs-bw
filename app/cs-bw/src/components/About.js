@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route, Switch, Link } from 'react-router-dom';
-import Blog from './Blog';
+import { Link } from 'react-router-dom';
 
 const Button = styled.button`
 	background-color: #c6426e;

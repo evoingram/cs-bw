@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Route, Switch, Link } from 'react-router-dom';
 
 const Div = styled.div`
 	justify-content: center;
 	text-align: center;
+	padding-top: 3%;
 `
 
 function Header() {
