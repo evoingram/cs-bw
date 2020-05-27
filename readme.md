@@ -4,15 +4,8 @@
 
 ### Next Steps
 
-- [ ] read & take notes on [LS's Canvas buffer tutorial](https://github.com/LambdaSchool/CS-Build-Week-1/tree/master/resources/web/canvas-buffer)
-- [ ] read & take notes on [LS's Canvas tutorial](https://github.com/LambdaSchool/CS-Build-Week-1/tree/master/resources/web/canvas)
-- [ ] read & take notes on [the Canvas API](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API)
-- [ ] read & take notes on [the Canvas tutorial](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial)
-- [ ] read & take notes on [rendering multiple components](https://reactjs.org/docs/lists-and-keys.html#rendering-multiple-components)
 - [ ] day 2 blog post
-- [ ] day 3 blog post
-- [ ] day 4 blog post
-- [ ] day 5 blog post
+- [ ] add button hover color (purple)
 - [ ] make grid 25x25 AND adjustable to 4-5 different sizes
   - [ ] each cell clickable while NOT running
   - [ ] not clickable while running
@@ -21,6 +14,9 @@
 - [ ] set up state for individual cells (alive, toggleable,green | dead, non-toggleable, blue)
 - [ ] add functionality to toggle-grid, play, pause, next, clear buttons on GButtons.js
 - [ ] add functionality to preset 1 through 4 buttons on PSButtons.js
+- [ ] day 3 blog post
+- [ ] day 4 blog post
+- [ ] day 5 blog post
 - [ ] maybe add growing vine as border around outside if time allows
 
 ### Specs & Requirements
@@ -61,7 +57,7 @@ The main entry point of your application should house the visualization of this 
 - [X] Allow users to change the dimension of the grid being displayed
 - [X] On the main entry point of the application, include a separate section or link to another page or popup that describes the two main rules (birth & death) of Conway’s Game of Life
 - [ ] Deploy your app using a tool like GitHub Pages or Heroku
-- [ ] Deploy your app to a hosting service or, for iOS, to TestFlight (or the App Store!). Web devs can see more deployment info here. (possibly run build and then have server always point to index.html, www.aquoco.co/erica-ingram/CGOL/index.html)
+- [ ] Deploy your app to a hosting service or, for iOS, to TestFlight (or the App Store!). Web devs can see more deployment info here. (possibly run build and then have server always point to index.html, https://www.aquoco.co/erica-ingram/CGOL/index.html)
 
 #### Other Stretch Features
 
