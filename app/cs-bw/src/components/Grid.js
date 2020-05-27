@@ -196,6 +196,7 @@ class Game extends React.Component {
 			this.selectShape('pulsar');
 		}
 		setTimeout(() => this.drawCanvas(), 10);
+		this.setToDefault();
 	};
 
 	clickCanvas = event => {

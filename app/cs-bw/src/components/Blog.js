@@ -126,11 +126,8 @@ function Blog(props) {
 					lot of functions in the grid component.{' '}
 				</p>
 				<p>It does wrap around as opposed to just stopping at the edge.</p>
-				<p>
-					It's still janky initially; sometimes it doesn't start properly and I have to hit the buttons several times or in a certain order to get them to work, so I need to figure out why it's doing that.
-				</p>
 				<h2>Day 4: Thursday</h2>
-				<p>Today, I will attempt to do a 3D version and fix the janky issues as well as deploy.  Aside from deploying, I believe I've hit MVP and stretch.</p>
+				<p>Today, I will attempt to do a 3D version and fix any janky clear issues left over from Wednesday as well as deploy.  Aside from deploying, I believe I've hit MVP and stretch.  </p>
 				<h2>Day 5: Friday</h2>
 				<p></p>
 			</Div2>
