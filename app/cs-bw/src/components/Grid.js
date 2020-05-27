@@ -15,7 +15,6 @@ import { beacon } from './shapes/Beacon';
 import { toad } from './shapes/Toad';
 import { glider } from './shapes/Glider';
 import { pulsar } from './shapes/Pulsar';
-import { ggun } from './shapes/Ggun';
 
 const Div = styled.div`
 	display: flex;
@@ -30,9 +29,9 @@ const Div1 = styled.div`
 
 // Colors:  #2958AA (blue), #4E8A63 (green), #642B73 (purple), #C6426E (pink)
 
-let defaultGrid = mediumDefault;
-let firstGrid = mediumFirst;
-let secondGrid = mediumSecond;
+let gridDefault = mediumDefault;
+let gridRound1 = mediumFirst;
+let gridRound2 = mediumSecond;
 
 let currentGeneration = 1;
 let generationSpeed = 1000;
@@ -40,6 +39,9 @@ let generationSpeed = 1000;
 let animationFrameRequest;
 let animationInterval;
 
+let previousColumn, previousRow, nextColumn, nextRow;
+let count = 0;
+		
 class Game extends React.Component {
 	constructor(props) {
 		super(props);
@@ -57,6 +59,7 @@ class Game extends React.Component {
 			singleCellLength: 15
 		};
 	}
+
 	drawCanvas = () => {
 		let canvas = this.refs.canvas;
 		let cContext = canvas.getContext('2d');
@@ -85,6 +88,7 @@ class Game extends React.Component {
 			this.state.singleCellLength - 1
 		);
 	};
+
 	setDead = (cContext, x, y) => {
 		cContext.fillStyle = '#2958AA';
 		cContext.fillRect(
@@ -127,6 +131,14 @@ class Game extends React.Component {
 		}
 	};
 
+	aFRTime = () => {
+		animationFrameRequest = requestAnimationFrame(timestamp => {
+			animationInterval = setTimeout(() => {
+				this.onAnimFrame(timestamp);
+			}, this.state.generationSpeed);
+		});
+	};
+
 	togglePlay = () => {
 		if (this.state.nextAnimation === true) {
 			this.setState({ nextAnimation: false });
@@ -134,21 +146,17 @@ class Game extends React.Component {
 			clearInterval(animationInterval);
 		} else {
 			this.setState({ nextAnimation: true });
-			animationFrameRequest = requestAnimationFrame(timestamp => {
-				animationInterval = setTimeout(() => {
-					this.onAnimFrame(timestamp);
-				}, this.state.generationSpeed);
-			});
+			this.aFRTime();
 		}
 		this.toggleButtonText();
 	};
 
 	setToDefault = () => {
 		for (let i = 0; i < this.state.cellQuantityY; i++) {
-			firstGrid[i] = defaultGrid[i].slice();
-			secondGrid[i] = defaultGrid[i].slice();
+			gridRound1[i] = gridDefault[i].slice();
+			gridRound2[i] = gridDefault[i].slice();
 		}
-		this.setState({ currentGrid: defaultGrid });
+		this.setState({ currentGrid: gridDefault });
 
 		currentGeneration = 1;
 	};
@@ -161,36 +169,30 @@ class Game extends React.Component {
 		});
 
 		clearInterval(animationInterval);
-
 		cancelAnimationFrame(animationFrameRequest);
 
 		if (this.state.nextAnimation) {
-			animationFrameRequest = requestAnimationFrame(timestamp => {
-				animationInterval = setTimeout(() => {
-					this.onAnimFrame(timestamp);
-				}, this.state.generationSpeed);
-			});
+			this.aFRTime();
 		}
 		this.toggleButtonTextSpeed();
 	};
 
-	toggleGridSize = (size) => {
+	toggleGridSize = size => {
 		if (size === 'small') {
 			this.setState({ currentGrid: smallDefault });
 			this.setState({ boardSize: 'small', singleCellLength: 30, cellQuantityX: 15, cellQuantityY: 15 });
 
-			defaultGrid = smallDefault;
-			firstGrid = smallFirst;
-			secondGrid = smallSecond;
+			gridDefault = smallDefault;
+			gridRound1 = smallFirst;
+			gridRound2 = smallSecond;
 			this.selectShape('toad');
-
 		} else if (size === 'medium') {
 			this.setState({ currentGrid: mediumDefault });
 			this.setState({ boardSize: 'medium', singleCellLength: 15, cellQuantityX: 50, cellQuantityY: 50 });
 
-			defaultGrid = mediumDefault;
-			firstGrid = mediumFirst;
-			secondGrid = mediumSecond;
+			gridDefault = mediumDefault;
+			gridRound1 = mediumFirst;
+			gridRound2 = mediumSecond;
 			this.selectShape('pulsar');
 		}
 		setTimeout(() => this.drawCanvas(), 10);
@@ -207,8 +209,8 @@ class Game extends React.Component {
 			let ceilingToCalcY = y / this.state.singleCellLength;
 			let xc = Number(Math.ceil(ceilingToCalcX)) - 1;
 			let yc = Number(Math.ceil(ceilingToCalcY)) - 1;
-			firstGrid[yc][xc] = firstGrid[yc][xc] === 1 ? 0 : 1;
-			this.setState({ currentGrid: firstGrid });
+			gridRound1[yc][xc] = gridRound1[yc][xc] === 1 ? 0 : 1;
+			this.setState({ currentGrid: gridRound1 });
 		}
 	};
 
@@ -216,19 +218,19 @@ class Game extends React.Component {
 		if (!this.state.nextAnimation) {
 			for (let y = 0; y < this.state.cellQuantityY; y++) {
 				for (let x = 0; x < this.state.cellQuantityX; x++) {
-					firstGrid[y][x] = Math.round(Math.random());
+					gridRound1[y][x] = Math.round(Math.random());
 				}
 			}
-			this.setState({ currentGrid: firstGrid });
+			this.setState({ currentGrid: gridRound1 });
 		}
 	};
 
-	loadShape = (loadedShape, size) => { 
+	loadShape = (loadedShape, size) => {
 		for (let x = 0; x < size; x++) {
-			firstGrid[x] = loadedShape[x].slice();
+			gridRound1[x] = loadedShape[x].slice();
 		}
-		this.setState({ currentGrid: firstGrid });
-	}
+		this.setState({ currentGrid: gridRound1 });
+	};
 
 	selectShape = newShape => {
 		this.setState({ shape: newShape });
@@ -236,12 +238,186 @@ class Game extends React.Component {
 			this.loadShape(beacon, 15);
 		} else if (newShape === 'blinker') {
 			this.loadShape(blinker, 15);
-		}  else if (newShape === 'glider') {
+		} else if (newShape === 'glider') {
 			this.loadShape(glider, 15);
 		} else if (newShape === 'toad') {
 			this.loadShape(toad, 15);
-		} else if (newShape === "pulsar") {
+		} else if (newShape === 'pulsar') {
 			this.loadShape(pulsar, 50);
+		}
+	};
+
+	wrapCells = (x, y) => { 
+		previousRow = x - 1;
+		if (previousRow === -1) {
+			previousRow = this.state.cellQuantityY - 1;
+		}
+		nextRow = x + 1;
+		if (nextRow === this.state.cellQuantityY) {
+			nextRow = 0;
+		}
+		previousColumn = y - 1;
+		if (previousColumn === -1) {
+			previousColumn = this.state.cellQuantityX - 1;
+		}
+		nextColumn = y + 1;
+		if (nextColumn === this.state.cellQuantityX) {
+			nextColumn = 0;
+		}
+	}
+
+	countNeighbors = (x, y, gridRound) => { 
+		count = 0;
+		if (gridRound[previousRow][previousColumn]) {
+			count++;
+		}
+		if (gridRound[previousRow][y]) {
+			count++;
+		}
+		if (gridRound[previousRow][nextColumn]) {
+			count++;
+		}
+		if (gridRound[x][previousColumn]) {
+			count++;
+		}
+		if (gridRound[x][nextColumn]) {
+			count++;
+		}
+		if (gridRound[nextRow][previousColumn]) {
+			count++;
+		}
+		if (gridRound[nextRow][y]) {
+			count++;
+		}
+		if (gridRound[nextRow][nextColumn]) {
+			count++;
+		}
+	}
+	toggleStateNeighbors = (x, y, gridComparisonIf, gridComparisonChanged) => { 
+
+		if (gridComparisonIf[x][y] === 1 && count < 2) {
+			gridComparisonChanged[x][y] = 0;
+		} else if (gridComparisonIf[x][y] === 1 && (count === 2 || count === 3)) {
+			gridComparisonChanged[x][y] = 1;
+		} else if (gridComparisonIf[x][y] === 1 && count > 3) {
+			gridComparisonChanged[x][y] = 0;
+		} else if (gridComparisonIf[x][y] === 0 && count === 3) {
+			gridComparisonChanged[x][y] = 1;
+		} else if (gridComparisonIf[x][y] === 0 && count !== 3) {
+			gridComparisonChanged[x][y] = 0;
+		}
+
+
+	}
+
+	advanceByGeneration = () => {
+		if (this.state.currentCycle === true) {
+
+				this.aFRTime();
+				this.colorCells();
+
+				// create next buffer
+				for (let i = 0; i < this.state.cellQuantityY; i++) {
+
+					for (let j = 0; j <= this.state.cellQuantityX; j++) {
+
+						// wrap
+						this.wrapCells(i, j);
+
+						// count live neighbors
+						this.countNeighbors(i, j, gridRound1);
+
+						// check neighbors to toggle state
+						this.toggleStateNeighbors(i, j, gridRound1, gridRound2); 
+
+					}
+				}
+				this.setState({ currentGrid: gridRound2 });
+				this.setState({ currentCycle: false });
+				currentGeneration++;
+		} else {
+				this.aFRTime();
+				this.colorCells();
+
+				// create next buffer
+				for (let i = 0; i < this.state.cellQuantityY; i++) {
+					for (let j = 0; j <= this.state.cellQuantityX; j++) {
+
+						// wrap
+						this.wrapCells(i, j);
+
+						// count live neighbors
+						this.countNeighbors(i, j, gridRound2);
+
+						// check neighbors to toggle state
+						this.toggleStateNeighbors(i, j, gridRound2, gridRound1); 
+
+					}
+				}
+				this.setState({ currentGrid: gridRound1 });
+				this.setState({ currentCycle: true });
+				currentGeneration++;
+
+		}
+	}
+
+	onAnimFrame = timestamp => {
+		
+		if (this.state.currentCycle === true) {
+			if (this.state.nextAnimation === true) {
+
+				this.aFRTime();
+				this.colorCells();
+
+				// create next buffer
+				for (let i = 0; i < this.state.cellQuantityY; i++) {
+
+					for (let j = 0; j <= this.state.cellQuantityX; j++) {
+
+						// wrap
+						this.wrapCells(i, j);
+
+						// count live neighbors
+						this.countNeighbors(i, j, gridRound1);
+
+						// check neighbors to toggle state
+						this.toggleStateNeighbors(i, j, gridRound1, gridRound2); 
+
+					}
+				}
+				this.setState({ currentGrid: gridRound2 });
+				this.setState({ currentCycle: false });
+				currentGeneration++;
+			} else {
+				cancelAnimationFrame(animationFrameRequest);
+			}
+		} else {
+			if (this.state.nextAnimation === true) {
+				this.aFRTime();
+				this.colorCells();
+
+				// create next buffer
+				for (let i = 0; i < this.state.cellQuantityY; i++) {
+					for (let j = 0; j <= this.state.cellQuantityX; j++) {
+
+						// wrap
+						this.wrapCells(i, j);
+
+						// count live neighbors
+						this.countNeighbors(i, j, gridRound2);
+
+						// check neighbors to toggle state
+						this.toggleStateNeighbors(i, j, gridRound2, gridRound1); 
+
+					}
+				}
+				this.setState({ currentGrid: gridRound1 });
+				this.setState({ currentCycle: true });
+				currentGeneration++;
+
+			} else {
+				cancelAnimationFrame(animationFrameRequest);
+			}
 		}
 	};
 
@@ -262,7 +438,7 @@ class Game extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<Div>
 				<div>
 					<canvas
 						ref="canvas"
@@ -286,9 +462,10 @@ class Game extends React.Component {
 						toggleSpeed={this.toggleSpeed}
 						selectShape={this.selectShape}
 						generateRandomShape={this.generateRandomShape}
+						advanceByGeneration={this.advanceByGeneration}
 					/>
 				</div>
-			</div>
+			</Div>
 		);
 	}
 }

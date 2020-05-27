@@ -49,8 +49,8 @@ class GButtons extends React.Component {
 					<Button id="GB2" onClick={this.props.toggleSpeed}>
 						<H4>{this.props.buttonTextSpeed}</H4>
 					</Button>
-					<Button id="GB3" onClick={this.props.setToDefault}>
-						<H4>Clear</H4>
+					<Button id="GB3" onClick={this.props.advanceByGeneration}>
+						<H4>Next</H4>
 					</Button>
 					<Button
 						id="GB4"
@@ -91,6 +91,9 @@ class GButtons extends React.Component {
 					</Button>
 					<Button id="PS5">
 						<H4>3D Version</H4>
+					</Button>
+					<Button id="GB3" onClick={this.props.setToDefault}>
+						<H4>Clear</H4>
 					</Button>
 				</Div>
 			</div>
