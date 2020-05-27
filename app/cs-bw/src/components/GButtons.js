@@ -19,12 +19,15 @@ const Button = styled.button`
 	&:hover {
 		background-color: #642b73;
 	}
+	min-width: 147px;
 `;
 const Div = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
-`
+	margin-top: 2%;
+	margin-bottom: 2%;
+`;
 const H4 = styled.h4`
 	margin-top: 5%;
 	margin-bottom: 5%;
@@ -63,6 +66,31 @@ class GButtons extends React.Component {
 						}}
 					>
 						<H4>Toggle Grid Size</H4>
+					</Button>
+				</Div>
+				<Div>
+					<Button id="PS1" onClick={() => this.props.selectShape('glider')}>
+						<H4>Glider</H4>
+					</Button>
+					<Button id="PS2" onClick={() => this.props.selectShape('beacon')}>
+						<H4>Beacon</H4>
+					</Button>
+					<Button id="PS3" onClick={() => this.props.selectShape('toad')}>
+						<H4>Toad</H4>
+					</Button>
+					<Button id="PS3" onClick={() => this.props.selectShape('pulsar')}>
+						<H4>
+							Pulsar <br />
+							(Medium Only)
+						</H4>
+					</Button>
+				</Div>
+				<Div>
+					<Button id="PS4" onClick={this.props.generateRandomShape}>
+						<H4>Random</H4>
+					</Button>
+					<Button id="PS5">
+						<H4>3D Version</H4>
 					</Button>
 				</Div>
 			</div>

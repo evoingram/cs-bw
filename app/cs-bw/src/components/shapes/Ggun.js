@@ -2,7 +2,7 @@
 
                 
 
-export const configGgun = [
+export const ggun = [
                         new Array(190).fill(0),
                         new Array(190).fill(0),
                         new Array(190).fill(0),
@@ -85,4 +85,4 @@ export const configGgun = [
                         new Array(190).fill(0)
                     ];
 
-export default configGgun;
+export default ggun;

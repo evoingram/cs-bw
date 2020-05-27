@@ -1,5 +1,5 @@
 
-export const configPulsar = [
+export const pulsar = [
                             new Array(50).fill(0),
                             new Array(50).fill(0),
                             new Array(50).fill(0),
@@ -52,4 +52,4 @@ export const configPulsar = [
                             new Array(50).fill(0)
                             ];
 
-export default configPulsar;
+export default pulsar;

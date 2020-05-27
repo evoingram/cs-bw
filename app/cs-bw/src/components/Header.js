@@ -5,7 +5,8 @@ const Div = styled.div`
 	justify-content: center;
 	text-align: center;
 	padding-top: 3%;
-`
+	padding-bottom: 3%;
+`;
 
 function Header() {
 	return (

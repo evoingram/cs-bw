@@ -1,5 +1,5 @@
 let blankArray = new Array(15).fill(0);
-export const configBlinker = [
+export const blinker = [
 			blankArray,
 			blankArray,
 			blankArray,
@@ -25,4 +25,4 @@ export const configBlinker = [
 			blankArray
 		];
 
-export default configBlinker;
+export default blinker;

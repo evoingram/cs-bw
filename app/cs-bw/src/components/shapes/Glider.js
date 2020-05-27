@@ -1,5 +1,5 @@
 
-export const configGlider = [
+export const glider = [
 			new Array(15).fill(0),
 			new Array(15).fill(0),
 			new Array(15).fill(0),
@@ -37,4 +37,4 @@ export const configGlider = [
 			new Array(15).fill(0),
 			new Array(15).fill(0)
 		];
-export default configGlider;
+export default glider;

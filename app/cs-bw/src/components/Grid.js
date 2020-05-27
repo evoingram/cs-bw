@@ -1,8 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import GButtons from './GButtons';
-import GOL from './GOL';
-import { useAnimeFrame } from '../customHooks/useAnimeFrame.js';
 
 import mediumDefault from './sizes/mediumDefault';
 import mediumFirst from './sizes/mediumFirst';
@@ -12,12 +10,12 @@ import smallDefault from './sizes/smallDefault';
 import smallFirst from './sizes/smallFirst';
 import smallSecond from './sizes/smallSecond';
 
-import { configBlinker } from './configs/configBlinker';
-import { configBeacon } from './configs/configBeacon';
-import { configToad } from './configs/configToad';
-import { configGlider } from './configs/configGlider';
-import { configPulsar } from './configs/configPulsar';
-import { configGgun } from './configs/configGgun';
+import { blinker } from './shapes/Blinker';
+import { beacon } from './shapes/Beacon';
+import { toad } from './shapes/Toad';
+import { glider } from './shapes/Glider';
+import { pulsar } from './shapes/Pulsar';
+import { ggun } from './shapes/Ggun';
 
 const Div = styled.div`
 	display: flex;
@@ -177,7 +175,6 @@ class Game extends React.Component {
 	};
 
 	toggleGridSize = (size) => {
-		console.log('toggleGridSize running');
 		if (size === 'small') {
 			this.setState({ currentGrid: smallDefault });
 			this.setState({ boardSize: 'small', singleCellLength: 30, cellQuantityX: 15, cellQuantityY: 15 });
@@ -226,30 +223,31 @@ class Game extends React.Component {
 		}
 	};
 
-	selectShape = shape => {
-		this.setState({ shape: shape });
-		if (shape === 'blinker') {
-			for (let x = 0; x < 15; x++) {
-				firstGrid[x] = configBlinker[x].slice();
-			}
-		} else if (shape === 'beacon') {
-			for (let x = 0; x < 15; x++) {
-				firstGrid[x] = configBeacon[x].slice();
-			}
-		} else if (shape === 'toad') {
-			for (let x = 0; x < 15; x++) {
-				firstGrid[x] = configToad[x].slice();
-			}
-		} else if (shape === 'glider') {
-			for (let x = 0; x < 15; x++) {
-				firstGrid[x] = configGlider[x].slice();
-			}
-		} 
+	loadShape = (loadedShape, size) => { 
+		for (let x = 0; x < size; x++) {
+			firstGrid[x] = loadedShape[x].slice();
+		}
 		this.setState({ currentGrid: firstGrid });
+	}
+
+	selectShape = newShape => {
+		this.setState({ shape: newShape });
+		if (newShape === 'beacon') {
+			this.loadShape(beacon, 15);
+		} else if (newShape === 'blinker') {
+			this.loadShape(blinker, 15);
+		}  else if (newShape === 'glider') {
+			this.loadShape(glider, 15);
+		} else if (newShape === 'toad') {
+			this.loadShape(toad, 15);
+		} else if (newShape === "pulsar") {
+			this.loadShape(pulsar, 50);
+		}
 	};
 
 	componentDidMount = () => {
 		this.drawCanvas();
+		this.toggleGridSize('medium');
 	};
 
 	componentDidUpdate = () => {
@@ -266,9 +264,6 @@ class Game extends React.Component {
 		return (
 			<div>
 				<div>
-					<center>
-						<h1>Generation {currentGeneration}</h1>
-					</center>
 					<canvas
 						ref="canvas"
 						id="gameCanvas"
@@ -278,6 +273,9 @@ class Game extends React.Component {
 					/>
 				</div>
 				<div>
+					<center>
+						<h1>Generation {currentGeneration}</h1>
+					</center>
 					<GButtons
 						buttonText={this.state.buttonText}
 						buttonTextSpeed={this.state.buttonTextSpeed}
@@ -286,6 +284,8 @@ class Game extends React.Component {
 						setToDefault={this.setToDefault}
 						togglePlay={this.togglePlay}
 						toggleSpeed={this.toggleSpeed}
+						selectShape={this.selectShape}
+						generateRandomShape={this.generateRandomShape}
 					/>
 				</div>
 			</div>

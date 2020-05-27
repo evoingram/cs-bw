@@ -1,4 +1,4 @@
-export const configBeacon = [
+export const beacon = [
 			new Array(15).fill(0),
 			new Array(15).fill(0),
 			new Array(15).fill(0),
@@ -16,4 +16,4 @@ export const configBeacon = [
 			new Array(15).fill(0)
 		];
 
-export default configBeacon;
+export default beacon;

@@ -37,6 +37,7 @@ const FlexContainer = styled.div`
 	flex-direction: row;
 	justify-content: space-evenly;
   	padding: 1%;
+	margin-top: 1%;
 `;
 const FlexSubContainers1 = styled.div`
   	padding: 1%;
@@ -50,7 +51,7 @@ const FlexSubContainers2 = styled.div`
 `;
 const FlexSubContainers3 = styled.div`
   padding: 0.5%;
-  max-width: 18%;
+  max-width: 25%;
 `;
 /*
 font-family: 'Caveat', cursive;
@@ -85,7 +86,6 @@ class App extends React.Component {
 	render() {
 		return (
 			<Div>
-				<Header />
 				<FlexContainer>
 					<FlexSubContainers1>
 						<Grid
@@ -97,10 +97,8 @@ class App extends React.Component {
 							currentGeneration={this.state.currentGeneration}
 						/>
 					</FlexSubContainers1>
-					<FlexSubContainers2>
-						<PSButtons />
-					</FlexSubContainers2>
 					<FlexSubContainers3>
+						<Header />
 						<Rules />
 					</FlexSubContainers3>
 				</FlexContainer>

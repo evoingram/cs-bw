@@ -1,6 +1,6 @@
 
 
-export const configToad = [
+export const toad = [
 			new Array(15).fill(0),
 			new Array(15).fill(0),
 			new Array(15).fill(0),
@@ -18,4 +18,4 @@ export const configToad = [
 			new Array(15).fill(0)
 		];
 
-export default configToad;
+export default toad;
