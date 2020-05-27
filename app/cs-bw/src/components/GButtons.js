@@ -31,28 +31,36 @@ const H4 = styled.h4`
 `;
 
 
-function GButtons() {
-	return (
-		<div>
-			<Div>
-				<Button id="GB1">
-					<H4>Play</H4>
-				</Button>
-				<Button id="GB2">
-					<H4>Pause</H4>
-				</Button>
-				<Button id="GB3">
-					<H4>Stop</H4>
-				</Button>
-				<Button id="GB4">
-					<H4>Next</H4>
-				</Button>
-				<Button id="GB5">
-					<H4>Clear</H4>
-				</Button>
-			</Div>
-		</div>
-	);
+class GButtons extends React.Component {
+	constructor(props) {
+		super(props);
+	}
+
+	render() {
+		return (
+			<div>
+				<Div>
+					<Button id="GB1">
+						<H4>Play</H4>
+					</Button>
+					<Button id="GB3">
+						<H4>Stop</H4>
+					</Button>
+					<Button id="GB4">
+						<H4>Next</H4>
+					</Button>
+					<Button id="GB5">
+						<H4>Clear</H4>
+					</Button>
+					<Button id="PS5" onClick={this.props.toggleGridSize}>
+						<H4>
+							Toggle Next Grid Size <br />Current: {this.props.currentGS}x{this.props.currentGS}
+						</H4>
+					</Button>
+				</Div>
+			</div>
+		);
+	}
 }
 
 export default GButtons;

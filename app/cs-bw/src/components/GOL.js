@@ -1,8 +1,6 @@
 
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useAnimeFrame } from '../customHooks/useAnimeFrame.js';
-import moment from 'moment';
 
 const Canvas = styled.canvas`
     border: 1px solid black;
@@ -11,32 +9,26 @@ const Canvas = styled.canvas`
 
 class GOL extends React.Component {
 	constructor(props) {
-		super(props);
-		this.state = {
-			running: false,
-			canvasGrid: [],
-			cellLifeGrid: [],
-			cWidth: 0,
-			cHeight: 0,
-			currentGeneration: 0
-		};
+        super(props);
+        this.state = {
+            currentSizeGrid: this.props.currentGS
+        }
 	}
-
 	// Colors:  #2958AA (blue), #4E8A63 (green), #642B73 (purple), #C6426E (pink)
 
-    setLive = (cContext, x, y, boxWidth, boxHeight) => {
-        // TODO:  Add live state
+	setLive = (cContext, x, y, boxWidth, boxHeight) => {
+		// TODO:  Add live state
 		cContext.fillStyle = `rgb(78, 138, 99)`;
 		cContext.fillRect(x, y, boxWidth, boxHeight);
 	};
 
 	setDead = (cContext, x, y, boxWidth, boxHeight) => {
-        // TODO:  Add dead state
+		// TODO:  Add dead state
 		cContext.fillStyle = `rgb(41, 88, 170)`;
 		cContext.fillRect(x, y, boxWidth, boxHeight);
 	};
 
-    defaultFill = (cContext, cWidth, boxWidth, cHeight, boxHeight) => { 
+	defaultFill = (cContext, cWidth, boxWidth, cHeight, boxHeight) => {
 		for (let x = 0; x <= cWidth; x += boxWidth) {
 			for (let y = 0; y <= cHeight; y += boxHeight) {
 				cContext.moveTo(x, 0);
@@ -53,20 +45,22 @@ class GOL extends React.Component {
 				}
 			}
 		}
-    };
-    
+	};
+
 	componentDidMount() {
-		let canvasGrid = new Array(255).fill(0);
-		let actualCanvas = this.refs.canvas;
-		let cContext = actualCanvas.getContext('2d');
-		let cWidth = cContext.canvas.width;
-		let cHeight = cContext.canvas.height;
-		let boxWidth = cWidth / 25;
-		let boxHeight = cHeight / 25;
+							let canvasGrid = new Array(255).fill(0);
+							let actualCanvas = this.refs.canvas;
+							let cContext = actualCanvas.getContext('2d');
+							let cWidth = cContext.canvas.width;
+							let cHeight = cContext.canvas.height;
+							let boxWidth = cWidth / this.state.currentSizeGrid;
+							let boxHeight = cHeight / this.state.currentSizeGrid;
+							console.log(`CDM currentSizeGrid = ${this.state.currentSizeGrid}`);
+							console.log(`CDM currentGS = ${this.props.currentGS}`);
+							console.log(`CDM currentGridSize = ${this.props.currentGridSize}`);
+							this.defaultFill(cContext, cWidth, boxWidth, cHeight, boxHeight);
 
-		this.defaultFill(cContext, cWidth, boxWidth, cHeight, boxHeight);
-
-		/*
+							/*
 		let imageData = cContext.getImageData(0, 0, cWidth, cHeight);
 
 		let screenBuffer = imageData.data;
@@ -88,8 +82,10 @@ class GOL extends React.Component {
                 cWidth: boxWidth,
                 cHeight: boxHeight
             });
+            
+            
         */
-	}
+						}
 	render() {
 		return (
 			<div>

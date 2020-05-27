@@ -45,7 +45,7 @@ const FlexSubContainers1 = styled.div`
 `;
 const FlexSubContainers2 = styled.div`
   padding: 0.5%;
-  max-width: 15%;
+  max-width: 20%;
 `;
 const FlexSubContainers3 = styled.div`
   padding: 0.5%;
@@ -68,24 +68,60 @@ html {
 }
 */
 
-function App() {
-  return (
-		<Div>
-			<Header />
-			<FlexContainer>
-				<FlexSubContainers1>
-					<Grid />
-				</FlexSubContainers1>
-				<FlexSubContainers2>
-				<PSButtons />
-				</FlexSubContainers2>
-				<FlexSubContainers3>
-				<Rules />
-				</FlexSubContainers3>
-			</FlexContainer>
-			<Footer />
-		</Div>
-  );
+class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			hasUpdated: false,
+			running: false,
+			canvasGrid: [],
+			cellLifeGrid: [],
+			gridSizes: [25, 50, 75],
+			currentGridSize: 25,
+			cWidth: 0,
+			cHeight: 0,
+			currentGeneration: 0
+		};
+	}
+	updateGrid = () => {
+		console.log('updateGrid running');
+		this.forceUpdate();
+		console.log(`${this.state.currentGridSize}`);
+	};
+
+	render() {
+		return (
+			<Div>
+				<Header />
+				<FlexContainer>
+					<FlexSubContainers1>
+						<Grid
+							updateGrid={this.updateGrid}
+							hasUpdated={this.state.hasUpdated}
+							running={this.state.running}
+							canvasGrid={this.state.canvasGrid}
+							cellLifeGrid={this.state.cellLifeGrid}
+							gridSizes={this.state.gridSizes}
+							currentGridSize={this.state.currentGridSize}
+							cWidth={this.state.cWidth}
+							cHeight={this.state.cHeight}
+						/>
+					</FlexSubContainers1>
+					<FlexSubContainers2>
+						<PSButtons
+							gridSizes={this.state.gridSizes}
+							currentGridSize={this.state.currentGridSize}
+							updateGrid={this.updateGrid}
+						/>
+					</FlexSubContainers2>
+					<FlexSubContainers3>
+						<Rules />
+					</FlexSubContainers3>
+				</FlexContainer>
+				<Footer />
+			</Div>
+		);
+	}
 }
 
 export default App;
