@@ -101,7 +101,7 @@ function Blog(props) {
 				<p>
 					I incorporated three fonts into the UI before I started in on the grid/algorithm portions of this project.  I selected a handwriting-style font for the blog post, a computer-looking or style font for the default, and a second handwriting-style font for the about portion.  I might change the second one before this is complete; it looks a little like Comic Sans now that I've got it installed.
 				</p>
-				<p>In terms of the grid itself, first I drew an empty grid with a black border.  Then I filled it in with my 'dead' color, a blue from a palette I picked out on Coolors.  The alive color will be a green from the same place.</p>
+				<p>In terms of the grid itself, first I drew an empty grid with a black border.  Then I filled it in with my 'dead' color, a blue from a palette I picked out on Coolors.  The alive color will be a green from the same place.  However, I didn't fully get this feature fleshed out.  I drew it but it was very slow to change grid sizes, so I can't do it that way.  I have to figure out another way.  But I banged my head against it all day.  Hopefully it will become clearer tomorrow.</p>
 				<h2>Day 3: Wednesday</h2>
 				<p></p>
 				<h2>Day 4: Thursday</h2>
