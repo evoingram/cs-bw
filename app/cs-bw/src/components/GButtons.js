@@ -40,23 +40,29 @@ class GButtons extends React.Component {
 		return (
 			<div>
 				<Div>
-					<Button id="GB1">
+					<Button id="GB1" onClick={this.props.togglePlay}>
 						<H4>{this.props.buttonText}</H4>
 					</Button>
-					<Button id="GB3">
-						<H4>Stop</H4>
+					<Button id="GB2" onClick={this.props.toggleSpeed}>
+						<H4>{this.props.buttonTextSpeed}</H4>
 					</Button>
-					<Button id="GB4">
-						<H4>Next</H4>
-					</Button>
-					<Button id="GB5">
+					<Button id="GB3" onClick={this.props.setToDefault}>
 						<H4>Clear</H4>
 					</Button>
-					<Button id="PS5" onClick={this.props.toggleGridSize}>
-						<H4>
-							Toggle Next Grid Size <br />
-							Current:  {this.props.boardSize}
-						</H4>
+					<Button
+						id="GB4"
+						onClick={e => {
+							let size;
+							if (this.props.boardSize === 'small') {
+								size = 'medium';
+							} else {
+								size = 'small';
+							}
+							this.props.toggleGridSize(size);
+							console.log(size);
+						}}
+					>
+						<H4>Toggle Grid Size</H4>
 					</Button>
 				</Div>
 			</div>

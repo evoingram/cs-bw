@@ -47,7 +47,7 @@ class Game extends React.Component {
 		super(props);
 		this.state = {
 			buttonText: 'Play',
-			buttonTextSpeed: 'Faster',
+			buttonTextSpeed: 'Fast',
 			boardSize: 'medium',
 			shape: 'pulsar',
 			nextAnimation: false,
@@ -120,12 +120,12 @@ class Game extends React.Component {
 	};
 
 	toggleButtonTextSpeed = () => {
-		if (this.state.buttonText === 'Faster') {
-			this.setState({ buttonText: 'Faster x2' });
-		} else if (this.state.buttonText === 'Faster x2') {
-			this.setState({ buttonText: 'Fastest' });
+		if (this.state.buttonTextSpeed === 'Fast') {
+			this.setState({ buttonTextSpeed: 'Faster' });
+		} else if (this.state.buttonTextSpeed === 'Faster') {
+			this.setState({ buttonTextSpeed: 'Fastest' });
 		} else {
-			this.setState({ buttonText: 'Faster' });
+			this.setState({ buttonTextSpeed: 'Fast' });
 		}
 	};
 
@@ -155,7 +155,29 @@ class Game extends React.Component {
 		currentGeneration = 1;
 	};
 
-	changeBoardSize = size => {
+	toggleSpeed = currentSpeed => {
+		generationSpeed = currentSpeed;
+
+		this.setState(() => {
+			return { generationSpeed: generationSpeed };
+		});
+
+		clearInterval(animationInterval);
+
+		cancelAnimationFrame(animationFrameRequest);
+
+		if (this.state.nextAnimation) {
+			animationFrameRequest = requestAnimationFrame(timestamp => {
+				animationInterval = setTimeout(() => {
+					this.onAnimFrame(timestamp);
+				}, this.state.generationSpeed);
+			});
+		}
+		this.toggleButtonTextSpeed();
+	};
+
+	toggleGridSize = (size) => {
+		console.log('toggleGridSize running');
 		if (size === 'small') {
 			this.setState({ currentGrid: smallDefault });
 			this.setState({ boardSize: 'small', singleCellLength: 30, cellQuantityX: 15, cellQuantityY: 15 });
@@ -163,6 +185,8 @@ class Game extends React.Component {
 			defaultGrid = smallDefault;
 			firstGrid = smallFirst;
 			secondGrid = smallSecond;
+			this.selectShape('toad');
+
 		} else if (size === 'medium') {
 			this.setState({ currentGrid: mediumDefault });
 			this.setState({ boardSize: 'medium', singleCellLength: 15, cellQuantityX: 50, cellQuantityY: 50 });
@@ -170,10 +194,6 @@ class Game extends React.Component {
 			defaultGrid = mediumDefault;
 			firstGrid = mediumFirst;
 			secondGrid = mediumSecond;
-		}
-		if (this.state.boardSize === 'small') {
-			this.selectShape('toad');
-		} else {
 			this.selectShape('pulsar');
 		}
 		setTimeout(() => this.drawCanvas(), 10);
@@ -206,6 +226,28 @@ class Game extends React.Component {
 		}
 	};
 
+	selectShape = shape => {
+		this.setState({ shape: shape });
+		if (shape === 'blinker') {
+			for (let x = 0; x < 15; x++) {
+				firstGrid[x] = configBlinker[x].slice();
+			}
+		} else if (shape === 'beacon') {
+			for (let x = 0; x < 15; x++) {
+				firstGrid[x] = configBeacon[x].slice();
+			}
+		} else if (shape === 'toad') {
+			for (let x = 0; x < 15; x++) {
+				firstGrid[x] = configToad[x].slice();
+			}
+		} else if (shape === 'glider') {
+			for (let x = 0; x < 15; x++) {
+				firstGrid[x] = configGlider[x].slice();
+			}
+		} 
+		this.setState({ currentGrid: firstGrid });
+	};
+
 	componentDidMount = () => {
 		this.drawCanvas();
 	};
@@ -224,7 +266,9 @@ class Game extends React.Component {
 		return (
 			<div>
 				<div>
-					<h1>Generation {currentGeneration}</h1>
+					<center>
+						<h1>Generation {currentGeneration}</h1>
+					</center>
 					<canvas
 						ref="canvas"
 						id="gameCanvas"
@@ -235,10 +279,13 @@ class Game extends React.Component {
 				</div>
 				<div>
 					<GButtons
+						buttonText={this.state.buttonText}
+						buttonTextSpeed={this.state.buttonTextSpeed}
 						boardSize={this.state.boardSize}
-						changeBoardSize={this.changeBoardSize}
+						toggleGridSize={this.toggleGridSize}
 						setToDefault={this.setToDefault}
-						togglePlay={togglePlay}
+						togglePlay={this.togglePlay}
+						toggleSpeed={this.toggleSpeed}
 					/>
 				</div>
 			</div>
