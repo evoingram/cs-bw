@@ -432,9 +432,6 @@ class Game extends React.Component {
 		}
 	};
 
-	componentWillUnmount = () => {
-		this.setState({ nextAnimation: false });
-	};
 
 	render() {
 		return (
