@@ -37,18 +37,26 @@ let firstGrid = mediumFirst;
 let secondGrid = mediumSecond;
 
 let currentGeneration = 1;
+let generationSpeed = 1000;
+
+let animationFrameRequest;
+let animationInterval;
 
 class Game extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentGrid: mediumDefault,
-			singleCellLength: 15,
-			buttonText: 'Start',
+			buttonText: 'Play',
 			buttonTextSpeed: 'Faster',
 			boardSize: 'medium',
+			shape: 'pulsar',
+			nextAnimation: false,
+			currentCycle: true,
+			generationSpeed: 200,
+			currentGrid: mediumDefault,
 			cellQuantityX: 50,
-			cellQuantityY: 50
+			cellQuantityY: 50,
+			singleCellLength: 15
 		};
 	}
 	drawCanvas = () => {
@@ -104,10 +112,10 @@ class Game extends React.Component {
 	};
 
 	toggleButtonText = () => {
-		if (this.state.buttonText === 'Start') {
+		if (this.state.buttonText === 'Play') {
 			this.setState({ buttonText: 'Stop' });
 		} else {
-			this.setState({ buttonText: 'Start' });
+			this.setState({ buttonText: 'Play' });
 		}
 	};
 
@@ -121,26 +129,43 @@ class Game extends React.Component {
 		}
 	};
 
+	togglePlay = () => {
+		if (this.state.nextAnimation === true) {
+			this.setState({ nextAnimation: false });
+			cancelAnimationFrame(animationFrameRequest);
+			clearInterval(animationInterval);
+		} else {
+			this.setState({ nextAnimation: true });
+			animationFrameRequest = requestAnimationFrame(timestamp => {
+				animationInterval = setTimeout(() => {
+					this.onAnimFrame(timestamp);
+				}, this.state.generationSpeed);
+			});
+		}
+		this.toggleButtonText();
+	};
+
 	setToDefault = () => {
 		for (let i = 0; i < this.state.cellQuantityY; i++) {
 			firstGrid[i] = defaultGrid[i].slice();
 			secondGrid[i] = defaultGrid[i].slice();
 		}
 		this.setState({ currentGrid: defaultGrid });
+
 		currentGeneration = 1;
 	};
 
 	changeBoardSize = size => {
 		if (size === 'small') {
 			this.setState({ currentGrid: smallDefault });
-			this.setState({ boardSize: 'small', cellQuantityX: 15, cellQuantityY: 15, singleCellLength: 30 });
+			this.setState({ boardSize: 'small', singleCellLength: 30, cellQuantityX: 15, cellQuantityY: 15 });
 
 			defaultGrid = smallDefault;
 			firstGrid = smallFirst;
 			secondGrid = smallSecond;
 		} else if (size === 'medium') {
 			this.setState({ currentGrid: mediumDefault });
-			this.setState({ boardSize: 'medium', cellQuantityX: 50, cellQuantityY: 50, singleCellLength: 15 });
+			this.setState({ boardSize: 'medium', singleCellLength: 15, cellQuantityX: 50, cellQuantityY: 50 });
 
 			defaultGrid = mediumDefault;
 			firstGrid = mediumFirst;
@@ -166,6 +191,17 @@ class Game extends React.Component {
 			let xc = Number(Math.ceil(ceilingToCalcX)) - 1;
 			let yc = Number(Math.ceil(ceilingToCalcY)) - 1;
 			firstGrid[yc][xc] = firstGrid[yc][xc] === 1 ? 0 : 1;
+			this.setState({ currentGrid: firstGrid });
+		}
+	};
+
+	generateRandomShape = () => {
+		if (!this.state.nextAnimation) {
+			for (let y = 0; y < this.state.cellQuantityY; y++) {
+				for (let x = 0; x < this.state.cellQuantityX; x++) {
+					firstGrid[y][x] = Math.round(Math.random());
+				}
+			}
 			this.setState({ currentGrid: firstGrid });
 		}
 	};
@@ -198,7 +234,12 @@ class Game extends React.Component {
 					/>
 				</div>
 				<div>
-					<GButtons boardSize={this.state.boardSize} />
+					<GButtons
+						boardSize={this.state.boardSize}
+						changeBoardSize={this.changeBoardSize}
+						setToDefault={this.setToDefault}
+						togglePlay={togglePlay}
+					/>
 				</div>
 			</div>
 		);

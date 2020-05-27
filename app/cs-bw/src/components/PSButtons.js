@@ -50,7 +50,7 @@ class PSButtons extends React.Component {
 					<H4>Beacon</H4>
 				</Button>
 				<Button id="PS3">
-					<H4>Pulsar</H4>
+					<H4>Toad</H4>
 				</Button>
 				<Button id="PS4">
 					<H4>Random</H4>

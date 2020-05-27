@@ -41,7 +41,7 @@ class GButtons extends React.Component {
 			<div>
 				<Div>
 					<Button id="GB1">
-						<H4>Play</H4>
+						<H4>{this.props.buttonText}</H4>
 					</Button>
 					<Button id="GB3">
 						<H4>Stop</H4>
