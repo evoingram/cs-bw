@@ -54,7 +54,8 @@ class GButtons extends React.Component {
 					</Button>
 					<Button id="PS5" onClick={this.props.toggleGridSize}>
 						<H4>
-							Toggle Next Grid Size <br />Current: {this.props.currentGS}x{this.props.currentGS}
+							Toggle Next Grid Size <br />
+							Current:  {this.props.boardSize}
 						</H4>
 					</Button>
 				</Div>

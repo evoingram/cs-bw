@@ -36,12 +36,13 @@ const FlexContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-evenly;
-  padding: 1%;
+  	padding: 1%;
 `;
 const FlexSubContainers1 = styled.div`
-  padding: 1%;
-  min-width: 775px;
+  	padding: 1%;
+  	min-width: 800px;
 	border: 1px solid black;
+	display: block;
 `;
 const FlexSubContainers2 = styled.div`
   padding: 0.5%;
@@ -74,20 +75,12 @@ class App extends React.Component {
 		this.state = {
 			hasUpdated: false,
 			running: false,
-			canvasGrid: [],
 			cellLifeGrid: [],
-			gridSizes: [25, 50, 75],
-			currentGridSize: 25,
 			cWidth: 0,
 			cHeight: 0,
-			currentGeneration: 0
+			currentGeneration: 1
 		};
 	}
-	updateGrid = () => {
-		console.log('updateGrid running');
-		this.forceUpdate();
-		console.log(`${this.state.currentGridSize}`);
-	};
 
 	render() {
 		return (
@@ -96,23 +89,16 @@ class App extends React.Component {
 				<FlexContainer>
 					<FlexSubContainers1>
 						<Grid
-							updateGrid={this.updateGrid}
 							hasUpdated={this.state.hasUpdated}
 							running={this.state.running}
-							canvasGrid={this.state.canvasGrid}
 							cellLifeGrid={this.state.cellLifeGrid}
-							gridSizes={this.state.gridSizes}
-							currentGridSize={this.state.currentGridSize}
 							cWidth={this.state.cWidth}
 							cHeight={this.state.cHeight}
+							currentGeneration={this.state.currentGeneration}
 						/>
 					</FlexSubContainers1>
 					<FlexSubContainers2>
-						<PSButtons
-							gridSizes={this.state.gridSizes}
-							currentGridSize={this.state.currentGridSize}
-							updateGrid={this.updateGrid}
-						/>
+						<PSButtons />
 					</FlexSubContainers2>
 					<FlexSubContainers3>
 						<Rules />
