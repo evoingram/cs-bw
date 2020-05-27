@@ -1,9 +1,20 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import GButtons from "./GButtons";
-import GOL from './GOL';
-import { useAnimeFrame } from '../customHooks/useAnimeFrame.js';
-import moment from 'moment';
+import GButtons from './GButtons';
+
+import mediumDefault from './sizes/mediumDefault';
+import mediumFirst from './sizes/mediumFirst';
+import mediumSecond from './sizes/mediumSecond';
+
+import smallDefault from './sizes/smallDefault';
+import smallFirst from './sizes/smallFirst';
+import smallSecond from './sizes/smallSecond';
+
+import blinker from './shapes/Blinker';
+import beacon from './shapes/Beacon';
+import toad from './shapes/Toad';
+import glider from './shapes/Glider';
+import pulsar from './shapes/Pulsar';
 
 const Div = styled.div`
 	display: flex;
@@ -14,229 +25,450 @@ const Div = styled.div`
 `;
 const Div1 = styled.div`
 	text-align: center;
-`
-
-const Canvas = styled.canvas`
-	border: 1px solid black;
-	margin-bottom: 3%;
 `;
 
 // Colors:  #2958AA (blue), #4E8A63 (green), #642B73 (purple), #C6426E (pink)
 
-class Grid extends React.Component {
+let gridDefault = mediumDefault;
+let gridRound1 = mediumFirst;
+let gridRound2 = mediumSecond;
+
+let currentGeneration = 1;
+let generationSpeed = 1000;
+
+let animationFrameRequest;
+let animationInterval;
+
+let previousColumn, previousRow, nextColumn, nextRow;
+let count = 0;
+		
+class Game extends React.Component {
 	constructor(props) {
 		super(props);
-		this.toggleGridSize = this.toggleGridSize.bind(this);
 		this.state = {
-			array1: [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
-                            ],
-			currentGS: this.props.currentGridSize,
-			numX: 50,
-			numY: 50,
-			cellSize: 15
+			buttonText: 'Play',
+			buttonTextSpeed: 'Fast',
+			boardSize: 'medium',
+			shape: 'pulsar',
+			nextAnimation: false,
+			currentCycle: true,
+			generationSpeed: 200,
+			currentGrid: mediumDefault,
+			cellQuantityX: 50,
+			cellQuantityY: 50,
+			singleCellLength: 15
 		};
 	}
-	
-	setStateFunction = (state, props) => {
-		const newState = { ...state, currentGridSize: this.state.currentGS };
-		console.log(`current Grid Size inside setStateFUnction 2 = ${this.state.currentGS}`);
-		return newState;
-	};
 
-	toggleGridSize = props => {
-		if (!this.state.currentGS) {
-			this.setState({ currentGridSize: this.props.gridSizes[0] });
-			return;
-		}
-		for (let x = this.props.gridSizes.length - 1; x > -1; x--) {
-			if (
-				this.props.gridSizes[x] === this.props.currentGridSize ||
-				this.props.gridSizes[x] === this.props.currentGS
-			) {
-				if (x === this.props.gridSizes.length - 1) {
-					this.setState({ currentGridSize: this.props.gridSizes[0] });
-					this.setState(this.setStateFunction);
-					this.setState({ currentGS: this.props.gridSizes[0] });
-					this.drawCanvas();
-					return;
-				} else {
-					this.setState({ currentGridSize: this.props.gridSizes[x + 1] });
-					this.setState(this.setStateFunction);
-					this.setState({ currentGS: this.props.gridSizes[x + 1] });
-					this.drawCanvas();
-					return;
-				}
-			}
-		}
-	};
-
-	setLive = (cContext, x, y, boxWidth, boxHeight) => {
-		// TODO:  Add live state
-		cContext.fillStyle = `rgb(78, 138, 99)`;
-		cContext.fillRect(x, y, boxWidth, boxHeight);
-	};
-
-	setDead = (cContext, x, y, boxWidth, boxHeight) => {
-		// TODO:  Add dead state
-		cContext.fillStyle = `rgb(41, 88, 170)`;
-		cContext.fillRect(x, y, boxWidth, boxHeight);
-	};
-
-	colorCells = () => {
-        const canvas = this.refs.canvas;
-		const cContext = canvas.getContext('2d');
-		for (let i = 0; i < this.state.numY; i++) {
-			for (let j = 0; j <= this.state.numX; j++) {
-				if (this.state.array1[i][j]) {
-					cContext.fillStyle = `rgb(78, 138, 99)`;
-					cContext.fillRect(
-						j * this.state.cellSize + 1,
-						i * this.state.cellSize + 1,
-						this.state.cellSize - 1,
-						this.state.cellSize - 1
-					);
-				} else {
-					cContext.fillStyle = `rgb(41, 88, 170)`;
-					cContext.fillRect(
-						j * this.state.cellSize + 1,
-						i * this.state.cellSize + 1,
-						this.state.cellSize - 1,
-						this.state.cellSize - 1
-					);
-				}
-			}
-		}
-	};
-	
-	defaultFill = (cContext, cWidth, boxWidth, cHeight, boxHeight) => {
-		for (let x = 0.5; x < this.state.numX * this.state.cellSize + 1; x += this.state.cellSize) {
+	drawCanvas = () => {
+		let canvas = this.refs.canvas;
+		let cContext = canvas.getContext('2d');
+		let maxWidth = this.state.cellQuantityX * this.state.singleCellLength + 1;
+		let maxHeight = (this.state.cellQuantityY + 1) * this.state.singleCellLength;
+		for (let x = 0.5; x < maxWidth; x += this.state.singleCellLength) {
 			cContext.moveTo(x, 0);
-			cContext.lineTo(x, (this.state.numX + 1) * this.state.cellSize);
+			cContext.lineTo(x, (this.state.cellQuantityX + 1) * this.state.singleCellLength);
 		}
-		for (let y = 0.5; y < (this.state.numY + 1) * this.state.cellSize; y += this.state.cellSize) {
+
+		for (let y = 0.5; y < maxHeight; y += this.state.singleCellLength) {
 			cContext.moveTo(0, y);
-			cContext.lineTo((this.state.numX + 1) * this.state.cellSize, y);
-			this.colorCells(cContext, cWidth, boxWidth, cHeight, boxHeight);
+			cContext.lineTo(maxHeight, y);
 		}
 
 		cContext.strokeStyle = '#000';
 		cContext.stroke();
 	};
 
-	drawCanvas = () => {
-		console.log(`drawCanvas currentGridSize = ${this.props.currentGridSize}`);
-		console.log(`drawCanvas currentGS = ${this.state.currentGS}`);
-		let canvasGrid = new Array(255).fill(0);
-		let actualCanvas = this.refs.canvas;
-		let cContext = actualCanvas.getContext('2d');
-		let cWidth = cContext.canvas.width;
-		let cHeight = cContext.canvas.height;
-		let boxWidth = cWidth / this.state.currentGS;
-		let boxHeight = cHeight / this.state.currentGS;
-		this.defaultFill(cContext, cWidth, boxWidth, cHeight, boxHeight);
-
-		/*
-		let imageData = cContext.getImageData(0, 0, cWidth, cHeight);
-
-		let screenBuffer = imageData.data;
-
-		let x = 10,
-			y = 20;
-
-		let index = (y * cWidth + x) * 4;
-
-		screenBuffer[index + 0] = 0x4e; // Red
-		screenBuffer[index + 1] = 0x8a; // Green
-		screenBuffer[index + 2] = 0x63; // Blue
-		screenBuffer[index + 3] = 0xff; // Alpha
-
-		cContext.putImageData(imageData, 0, 0);
-
-            this.setState({
-                canvasGrid: canvasGrid,
-                cWidth: boxWidth,
-                cHeight: boxHeight
-            });
-        */
+	setLive = (cContext, x, y) => {
+		cContext.fillStyle = '#4E8A63';
+		cContext.fillRect(
+			y * this.state.singleCellLength + 1,
+			x * this.state.singleCellLength + 1,
+			this.state.singleCellLength - 1,
+			this.state.singleCellLength - 1
+		);
 	};
 
-	componentDidMount() {
-		this.drawCanvas();
+	setDead = (cContext, x, y) => {
+		cContext.fillStyle = '#2958AA';
+		cContext.fillRect(
+			y * this.state.singleCellLength + 1,
+			x * this.state.singleCellLength + 1,
+			this.state.singleCellLength - 1,
+			this.state.singleCellLength - 1
+		);
+	};
+
+	colorCells = () => {
+		const canvas = this.refs.canvas;
+		const cContext = canvas.getContext('2d');
+		for (let x = 0; x < this.state.cellQuantityY; x++) {
+			for (let y = 0; y <= this.state.cellQuantityX; y++) {
+				if (this.state.currentGrid[x][y]) {
+					this.setLive(cContext, x, y);
+				} else {
+					this.setDead(cContext, x, y);
+				}
+			}
+		}
+	};
+
+	toggleButtonText = () => {
+		if (this.state.buttonText === 'Play') {
+			this.setState({ buttonText: 'Stop' });
+		} else {
+			this.setState({ buttonText: 'Play' });
+		}
+	};
+
+	toggleButtonTextSpeed = () => {
+		if (this.state.buttonTextSpeed === 'Fast') {
+			this.setState({ buttonTextSpeed: 'Faster' });
+		} else if (this.state.buttonTextSpeed === 'Faster') {
+			this.setState({ buttonTextSpeed: 'Fastest' });
+		} else {
+			this.setState({ buttonTextSpeed: 'Fast' });
+		}
+	};
+
+	aFRTime = () => {
+		animationFrameRequest = requestAnimationFrame(timestamp => {
+			animationInterval = setTimeout(() => {
+				this.onAnimFrame(timestamp);
+			}, this.state.generationSpeed);
+		});
+	};
+
+	togglePlay = () => {
+		if (this.state.nextAnimation === true) {
+			this.setState({ nextAnimation: false });
+			cancelAnimationFrame(animationFrameRequest);
+			clearInterval(animationInterval);
+		} else {
+			this.setState({ nextAnimation: true });
+			this.aFRTime();
+		}
+		this.toggleButtonText();
+	};
+
+	setToDefault = () => {
+		for (let i = 0; i < this.state.cellQuantityY; i++) {
+			gridRound1[i] = gridDefault[i].slice();
+			gridRound2[i] = gridDefault[i].slice();
+		}
+		this.setState({ currentGrid: gridDefault });
+
+		currentGeneration = 1;
+	};
+
+	toggleSpeed = currentSpeed => {
+		generationSpeed = currentSpeed;
+
+		this.setState(() => {
+			return { generationSpeed: generationSpeed };
+		});
+
+		clearInterval(animationInterval);
+		cancelAnimationFrame(animationFrameRequest);
+
+		if (this.state.nextAnimation) {
+			this.aFRTime();
+		}
+		this.toggleButtonTextSpeed();
+	};
+
+	toggleGridSize = size => {
+		if (size === 'small') {
+			this.setState({ currentGrid: smallDefault });
+			this.setState({ boardSize: 'small', singleCellLength: 30, cellQuantityX: 25, cellQuantityY: 25 });
+
+			gridDefault = smallDefault;
+			gridRound1 = smallFirst;
+			gridRound2 = smallSecond;
+			this.selectShape('toad');
+
+		} else if (size === 'medium') {
+			this.setState({ currentGrid: mediumDefault });
+			this.setState({ boardSize: 'medium', singleCellLength: 15, cellQuantityX: 50, cellQuantityY: 50 });
+
+			gridDefault = mediumDefault;
+			gridRound1 = mediumFirst;
+			gridRound2 = mediumSecond;
+			this.selectShape('pulsar');
+			if ((currentGeneration = 1)) {
+				this.setToDefault();
+			}
+		}
+		setTimeout(() => this.drawCanvas(), 10);
+	};
+
+	clickCanvas = event => {
+		let canvas = this.refs.canvas;
+		let rectangle = canvas.getBoundingClientRect();
+
+		if (!this.state.nextAnimation) {
+			let x = event.pageX - rectangle.left;
+			let y = event.pageY - rectangle.top - window.scrollY;
+			let ceilingToCalcX = x / this.state.singleCellLength;
+			let ceilingToCalcY = y / this.state.singleCellLength;
+			let xc = Number(Math.ceil(ceilingToCalcX)) - 1;
+			let yc = Number(Math.ceil(ceilingToCalcY)) - 1;
+			gridRound1[yc][xc] = gridRound1[yc][xc] === 1 ? 0 : 1;
+			this.setState({ currentGrid: gridRound1 });
+		}
+	};
+
+	generateRandomShape = () => {
+		if (!this.state.nextAnimation) {
+			for (let y = 0; y < this.state.cellQuantityY; y++) {
+				for (let x = 0; x < this.state.cellQuantityX; x++) {
+					gridRound1[y][x] = Math.round(Math.random());
+				}
+			}
+			this.setState({ currentGrid: gridRound1 });
+		}
+	};
+
+	loadShape = (loadedShape, size) => {
+		for (let x = 0; x < size; x++) {
+			gridRound1[x] = loadedShape[x].slice();
+		}
+		this.setState({ currentGrid: gridRound1 });
+	};
+
+	selectShape = newShape => {
+		this.setState({ shape: newShape });
+		if (newShape === 'beacon') {
+			this.loadShape(beacon, 15);
+		} else if (newShape === 'blinker') {
+			this.loadShape(blinker, 15);
+		} else if (newShape === 'glider') {
+			this.loadShape(glider, 15);
+		} else if (newShape === 'toad') {
+			this.loadShape(toad, 15);
+		} else if (newShape === 'pulsar') {
+			this.loadShape(pulsar, 50);
+		}
+	};
+
+	wrapCells = (x, y) => { 
+		previousRow = x - 1;
+		if (previousRow === -1) {
+			previousRow = this.state.cellQuantityY - 1;
+		}
+		nextRow = x + 1;
+		if (nextRow === this.state.cellQuantityY) {
+			nextRow = 0;
+		}
+		previousColumn = y - 1;
+		if (previousColumn === -1) {
+			previousColumn = this.state.cellQuantityX - 1;
+		}
+		nextColumn = y + 1;
+		if (nextColumn === this.state.cellQuantityX) {
+			nextColumn = 0;
+		}
 	}
+
+	countNeighbors = (x, y, gridRound) => { 
+		count = 0;
+		if (gridRound[previousRow][previousColumn]) {
+			count++;
+		}
+		if (gridRound[previousRow][y]) {
+			count++;
+		}
+		if (gridRound[previousRow][nextColumn]) {
+			count++;
+		}
+		if (gridRound[x][previousColumn]) {
+			count++;
+		}
+		if (gridRound[x][nextColumn]) {
+			count++;
+		}
+		if (gridRound[nextRow][previousColumn]) {
+			count++;
+		}
+		if (gridRound[nextRow][y]) {
+			count++;
+		}
+		if (gridRound[nextRow][nextColumn]) {
+			count++;
+		}
+	}
+	toggleStateNeighbors = (x, y, gridComparisonIf, gridComparisonChanged) => { 
+
+		if (gridComparisonIf[x][y] === 1 && count < 2) {
+			gridComparisonChanged[x][y] = 0;
+		} else if (gridComparisonIf[x][y] === 1 && (count === 2 || count === 3)) {
+			gridComparisonChanged[x][y] = 1;
+		} else if (gridComparisonIf[x][y] === 1 && count > 3) {
+			gridComparisonChanged[x][y] = 0;
+		} else if (gridComparisonIf[x][y] === 0 && count === 3) {
+			gridComparisonChanged[x][y] = 1;
+		} else if (gridComparisonIf[x][y] === 0 && count !== 3) {
+			gridComparisonChanged[x][y] = 0;
+		}
+
+
+	}
+
+	advanceByGeneration = () => {
+		if (this.state.currentCycle === true) {
+
+				this.aFRTime();
+				this.colorCells();
+
+				// create next buffer
+				for (let i = 0; i < this.state.cellQuantityY; i++) {
+
+					for (let j = 0; j <= this.state.cellQuantityX; j++) {
+
+						// wrap
+						this.wrapCells(i, j);
+
+						// count live neighbors
+						this.countNeighbors(i, j, gridRound1);
+
+						// check neighbors to toggle state
+						this.toggleStateNeighbors(i, j, gridRound1, gridRound2); 
+
+					}
+				}
+				this.setState({ currentGrid: gridRound2 });
+				this.setState({ currentCycle: false });
+				currentGeneration++;
+		} else {
+				this.aFRTime();
+				this.colorCells();
+
+				// create next buffer
+				for (let i = 0; i < this.state.cellQuantityY; i++) {
+					for (let j = 0; j <= this.state.cellQuantityX; j++) {
+
+						// wrap
+						this.wrapCells(i, j);
+
+						// count live neighbors
+						this.countNeighbors(i, j, gridRound2);
+
+						// check neighbors to toggle state
+						this.toggleStateNeighbors(i, j, gridRound2, gridRound1); 
+
+					}
+				}
+				this.setState({ currentGrid: gridRound1 });
+				this.setState({ currentCycle: true });
+				currentGeneration++;
+
+		}
+	}
+
+	onAnimFrame = timestamp => {
+		
+		if (this.state.currentCycle === true) {
+			if (this.state.nextAnimation === true) {
+
+				this.aFRTime();
+				this.colorCells();
+
+				// create next buffer
+				for (let i = 0; i < this.state.cellQuantityY; i++) {
+
+					for (let j = 0; j <= this.state.cellQuantityX; j++) {
+
+						// wrap
+						this.wrapCells(i, j);
+
+						// count live neighbors
+						this.countNeighbors(i, j, gridRound1);
+
+						// check neighbors to toggle state
+						this.toggleStateNeighbors(i, j, gridRound1, gridRound2); 
+
+					}
+				}
+				this.setState({ currentGrid: gridRound2 });
+				this.setState({ currentCycle: false });
+				currentGeneration++;
+			} else {
+				cancelAnimationFrame(animationFrameRequest);
+			}
+		} else {
+			if (this.state.nextAnimation === true) {
+				this.aFRTime();
+				this.colorCells();
+
+				// create next buffer
+				for (let i = 0; i < this.state.cellQuantityY; i++) {
+					for (let j = 0; j <= this.state.cellQuantityX; j++) {
+
+						// wrap
+						this.wrapCells(i, j);
+
+						// count live neighbors
+						this.countNeighbors(i, j, gridRound2);
+
+						// check neighbors to toggle state
+						this.toggleStateNeighbors(i, j, gridRound2, gridRound1); 
+
+					}
+				}
+				this.setState({ currentGrid: gridRound1 });
+				this.setState({ currentCycle: true });
+				currentGeneration++;
+
+			} else {
+				cancelAnimationFrame(animationFrameRequest);
+			}
+		}
+	};
+
+	componentDidMount = () => {
+		this.drawCanvas();
+		this.toggleGridSize('medium');
+	};
+
+	componentDidUpdate = () => {
+		if (!this.state.nextAnimation) {
+			this.colorCells();
+		}
+	};
+
+
 	render() {
 		return (
-			<Div1>
-				<h1>Generation ##</h1>
-				<Div>
-					<div>
-						<Canvas
-							id="canvas"
-							ref="canvas"
-							width={(this.state.numX + 1) * this.state.cellSize + 1}
-							height={this.state.numY * this.state.cellSize + 1}
-						></Canvas>
-					</div>
-					<GButtons
-						toggleGridSize={this.toggleGridSize}
-						setStateFunction={this.setStateFunction}
-						updateGrid={this.props.updateGrid}
-						currentGS={this.state.currentGS}
-						currentGridSize={this.props.currentGridSize}
-						gridSizes={this.props.gridSizes}
+			<Div>
+				<div>
+					<canvas
+						ref="canvas"
+						id="gameCanvas"
+						width={(this.state.cellQuantityX + 1) * this.state.singleCellLength + 1}
+						height={this.state.cellQuantityY * this.state.singleCellLength + 1}
+						onClick={this.clickCanvas}
 					/>
-				</Div>
-			</Div1>
+				</div>
+				<div>
+					<center>
+						<h1>Generation {currentGeneration}</h1>
+					</center>
+					<GButtons
+						buttonText={this.state.buttonText}
+						buttonTextSpeed={this.state.buttonTextSpeed}
+						boardSize={this.state.boardSize}
+						toggleGridSize={this.toggleGridSize}
+						setToDefault={this.setToDefault}
+						togglePlay={this.togglePlay}
+						toggleSpeed={this.toggleSpeed}
+						selectShape={this.selectShape}
+						generateRandomShape={this.generateRandomShape}
+						advanceByGeneration={this.advanceByGeneration}
+					/>
+				</div>
+			</Div>
 		);
 	}
 }
 
-export default Grid;
+export default Game;

@@ -72,7 +72,8 @@ function Blog(props) {
 					First, of course, I did some research to learn what Conway's Game of Life (CGOL) actually is, how it
 					works, its rules, and why it's useful as well as, relatedly, what are cellular automata, how are
 					they useful in real life. Then we were also asked to correctly analyze the Turing completeness of
-					CGOL. I researched how to work with canvas and how to render multiple components.  I took handwritten notes on all of it for purposes of additional repetition.
+					CGOL. I researched how to work with canvas and how to render multiple components. I took handwritten
+					notes on all of it for purposes of additional repetition.
 				</p>
 				<p>
 					Second, I took the rubric and the goals and made my own readme, including an evolving task list, to
@@ -99,13 +100,32 @@ function Blog(props) {
 				</p>
 				<h2>Day 2: Tuesday</h2>
 				<p>
-					I incorporated three fonts into the UI before I started in on the grid/algorithm portions of this project.  I selected a handwriting-style font for the blog post, a computer-looking or style font for the default, and a second handwriting-style font for the about portion.  I might change the second one before this is complete; it looks a little like Comic Sans now that I've got it installed.
+					I incorporated three fonts into the UI before I started in on the grid/algorithm portions of this
+					project. I selected a handwriting-style font for the blog post, a computer-looking or style font for
+					the default, and a second handwriting-style font for the about portion. I might change the second
+					one before this is complete; it looks a little like Comic Sans now that I've got it installed.
 				</p>
-				<p>In terms of the grid itself, first I drew an empty grid with a black border.  Then I filled it in with my 'dead' color, a blue from a palette I picked out on Coolors.  The alive color will be a green from the same place.  However, I didn't fully get this feature fleshed out.  I drew it but it was very slow to change grid sizes, so I can't do it that way.  I have to figure out another way.  But I banged my head against it all day.  Hopefully it will become clearer tomorrow.</p>
+				<p>
+					In terms of the grid itself, first I drew an empty grid with a black border. Then I filled it in
+					with my 'dead' color, a blue from a palette I picked out on Coolors. The alive color will be a green
+					from the same place. However, I didn't fully get this feature fleshed out. I drew it but it was very
+					slow to change grid sizes, so I can't do it that way. I have to figure out another way. But I banged
+					my head against it all day. Hopefully it will become clearer tomorrow.
+				</p>
 				<h2>Day 3: Wednesday</h2>
-				<p></p>
+				<p>
+					Finally, I got my blocker resolved and made a ton of headway today. So I did get my grid up and
+					clickable; also made a second size (25 and 50 squares), which the user can adjust. I made a function
+					which sets things to default for a clear button. I added some functions which allow speed
+					adjustment, shape selection, random shape generation, text of two buttons (play and current speed).
+					I added functionality to play and stop. Last but not least, I did the animation for the cells and
+					added generation-by-generation functionality via a button.
+				</p>
+				<p>
+					I went back and forth in my code quite a bit to separate out repeated code into reusable functions, so there are a
+					lot of functions in the grid component.  The cells wrap around as opposed to just stopping at the edge.</p>
 				<h2>Day 4: Thursday</h2>
-				<p></p>
+				<p>Today, I will add comments and attempt to do a 3D version as well as deploy.  Aside from deploying, I believe I've hit MVP and stretch.  </p>
 				<h2>Day 5: Friday</h2>
 				<p></p>
 			</Div2>
