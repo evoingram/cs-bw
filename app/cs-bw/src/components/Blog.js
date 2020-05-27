@@ -61,6 +61,11 @@ function Blog(props) {
 			</Route>
 
 			<h1>About This Project's Development</h1>
+			<h2>
+				<a href="https://www.github.com/evoingram/cs-bw/" target="_blank" rel="noopener noreferrer">
+					Github Code
+				</a>
+			</h2>
 			<Div2>
 				<h2>Day 1: Monday</h2>
 				<p>
@@ -122,10 +127,20 @@ function Blog(props) {
 					added generation-by-generation functionality via a button.
 				</p>
 				<p>
-					I went back and forth in my code quite a bit to separate out repeated code into reusable functions, so there are a
-					lot of functions in the grid component.  The cells wrap around as opposed to just stopping at the edge.</p>
+					I went back and forth in my code quite a bit to separate out repeated code into reusable functions,
+					so there are a lot of functions in the grid component. The cells wrap around as opposed to just
+					stopping at the edge.
+				</p>
 				<h2>Day 4: Thursday</h2>
-				<p>Today, I will add comments and attempt to do a 3D version as well as deploy.  Aside from deploying, I believe I've hit MVP and stretch.  </p>
+				<p>
+					I added comments to describe what each function does in the grid component and fixed a speed issue I
+					was having; the speed wasn't toggling correctly and one of the speed settings was way too fast, so I
+					had to adjust the function attached to the toggle-speed button which solved both of these issues.
+				</p>
+				<p>
+					Today, I will attempt to do a 3D version as well as deploy. Aside from deploying, I believe I've hit
+					MVP and stretch.{' '}
+				</p>
 				<h2>Day 5: Friday</h2>
 				<p></p>
 			</Div2>

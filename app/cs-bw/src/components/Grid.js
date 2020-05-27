@@ -441,10 +441,11 @@ class Game extends React.Component {
 					/>
 				</div>
 				<div>
-				<Div1>
+					<Div1>
 						<h1>Generation {currentGeneration}</h1>
-				</Div1>
+					</Div1>
 					<GButtons
+						generationSpeed={this.state.generationSpeed}
 						buttonText={this.state.buttonText}
 						buttonTextSpeed={this.state.buttonTextSpeed}
 						boardSize={this.state.boardSize}
