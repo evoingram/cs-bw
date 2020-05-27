@@ -10,11 +10,11 @@ import smallDefault from './sizes/smallDefault';
 import smallFirst from './sizes/smallFirst';
 import smallSecond from './sizes/smallSecond';
 
-import { blinker } from './shapes/Blinker';
-import { beacon } from './shapes/Beacon';
-import { toad } from './shapes/Toad';
-import { glider } from './shapes/Glider';
-import { pulsar } from './shapes/Pulsar';
+import blinker from './shapes/Blinker';
+import beacon from './shapes/Beacon';
+import toad from './shapes/Toad';
+import glider from './shapes/Glider';
+import pulsar from './shapes/Pulsar';
 
 const Div = styled.div`
 	display: flex;
@@ -180,12 +180,13 @@ class Game extends React.Component {
 	toggleGridSize = size => {
 		if (size === 'small') {
 			this.setState({ currentGrid: smallDefault });
-			this.setState({ boardSize: 'small', singleCellLength: 30, cellQuantityX: 15, cellQuantityY: 15 });
+			this.setState({ boardSize: 'small', singleCellLength: 30, cellQuantityX: 25, cellQuantityY: 25 });
 
 			gridDefault = smallDefault;
 			gridRound1 = smallFirst;
 			gridRound2 = smallSecond;
 			this.selectShape('toad');
+
 		} else if (size === 'medium') {
 			this.setState({ currentGrid: mediumDefault });
 			this.setState({ boardSize: 'medium', singleCellLength: 15, cellQuantityX: 50, cellQuantityY: 50 });
@@ -194,9 +195,11 @@ class Game extends React.Component {
 			gridRound1 = mediumFirst;
 			gridRound2 = mediumSecond;
 			this.selectShape('pulsar');
+			if ((currentGeneration = 1)) {
+				this.setToDefault();
+			}
 		}
 		setTimeout(() => this.drawCanvas(), 10);
-		this.setToDefault();
 	};
 
 	clickCanvas = event => {

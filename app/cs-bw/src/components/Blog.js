@@ -123,11 +123,9 @@ function Blog(props) {
 				</p>
 				<p>
 					I went back and forth in my code quite a bit to separate out repeated code into reusable functions, so there are a
-					lot of functions in the grid component.{' '}
-				</p>
-				<p>It does wrap around as opposed to just stopping at the edge.</p>
+					lot of functions in the grid component.  The cells wrap around as opposed to just stopping at the edge.</p>
 				<h2>Day 4: Thursday</h2>
-				<p>Today, I will attempt to do a 3D version and fix any janky clear issues left over from Wednesday as well as deploy.  Aside from deploying, I believe I've hit MVP and stretch.  </p>
+				<p>Today, I will add comments and attempt to do a 3D version as well as deploy.  Aside from deploying, I believe I've hit MVP and stretch.  </p>
 				<h2>Day 5: Friday</h2>
 				<p></p>
 			</Div2>
