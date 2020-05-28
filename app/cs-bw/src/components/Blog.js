@@ -38,11 +38,6 @@ const H4 = styled.h4`
 	font-family: 'Roboto', monospace;
 	font-size: 1rem;
 `;
-/*
-font-family: 'Caveat', cursive;
-font-family: 'Oxanium', cursive;
-font-family: 'Roboto Mono', monospace;
-*/
 
 function Blog(props) {
 
