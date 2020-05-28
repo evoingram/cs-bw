@@ -133,7 +133,7 @@ function Blog(props) {
 					had to adjust the function attached to the toggle-speed button which solved both of these issues.  I added a link to the project's GitHub repo.  I did some research and decided not to spend time on the 3D stuff.  I'd love to do it, but I have other things with a higher priority.
 				</p>
 				<p>
-					Last, I deployed to both Heroku pages and a subfolder of my company's website since that is a stretch item.
+					Last, I deployed to both Zeit and a subfolder of my company's website since that is a stretch item.
 				</p>
 			</Div2>
 		</div>

@@ -4,8 +4,8 @@
 
 ### Next Steps
 
-- [ ] day 4 blog post
-- [ ] deploy on github pages and AQC website
+    - https://cs-bw.now.sh/
+    - https://www.aquoco.co/erica-ingram/cgol/index.html
 
 #### Features
 
