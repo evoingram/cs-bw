@@ -133,11 +133,8 @@ function Blog(props) {
 					had to adjust the function attached to the toggle-speed button which solved both of these issues.  I added a link to the project's GitHub repo.  I did some research and decided not to spend time on the 3D stuff.  I'd love to do it, but I have other things with a higher priority.
 				</p>
 				<p>
-					Today, I will attempt to deploy. Aside from deploying, I believe I've hit
-					MVP and stretch.
+					Last, I deployed to both Heroku pages and a subfolder of my company's website since that is a stretch item.
 				</p>
-				<h2>Day 5: Friday</h2>
-				<p></p>
 			</Div2>
 		</div>
 	);
