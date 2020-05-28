@@ -130,10 +130,10 @@ function Blog(props) {
 				<p>
 					I added comments to describe what each function does in the grid component and fixed a speed issue I
 					was having; the speed wasn't toggling correctly and one of the speed settings was way too fast, so I
-					had to adjust the function attached to the toggle-speed button which solved both of these issues.  I added a link to the project's GitHub repo.
+					had to adjust the function attached to the toggle-speed button which solved both of these issues.  I added a link to the project's GitHub repo.  I did some research and decided not to spend time on the 3D stuff.  I'd love to do it, but I have other things with a higher priority.
 				</p>
 				<p>
-					Today, I will attempt to do a 3D version as well as deploy. Aside from deploying, I believe I've hit
+					Today, I will attempt to deploy. Aside from deploying, I believe I've hit
 					MVP and stretch.
 				</p>
 				<h2>Day 5: Friday</h2>

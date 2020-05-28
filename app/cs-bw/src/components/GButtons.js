@@ -96,9 +96,6 @@ class GButtons extends React.Component {
 					<Button id="PS4" onClick={this.props.generateRandomShape}>
 						<H4>Random</H4>
 					</Button>
-					<Button id="PS5">
-						<H4>3D Version</H4>
-					</Button>
 					<Button id="GB3" onClick={this.props.setToDefault}>
 						<H4>Clear</H4>
 					</Button>
