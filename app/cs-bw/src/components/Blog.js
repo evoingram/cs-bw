@@ -38,11 +38,6 @@ const H4 = styled.h4`
 	font-family: 'Roboto', monospace;
 	font-size: 1rem;
 `;
-/*
-font-family: 'Caveat', cursive;
-font-family: 'Oxanium', cursive;
-font-family: 'Roboto Mono', monospace;
-*/
 
 function Blog(props) {
 
@@ -61,6 +56,11 @@ function Blog(props) {
 			</Route>
 
 			<h1>About This Project's Development</h1>
+			<h2>
+				<a href="https://www.github.com/evoingram/cs-bw/" target="_blank" rel="noopener noreferrer">
+					Github Code
+				</a>
+			</h2>
 			<Div2>
 				<h2>Day 1: Monday</h2>
 				<p>
@@ -122,12 +122,19 @@ function Blog(props) {
 					added generation-by-generation functionality via a button.
 				</p>
 				<p>
-					I went back and forth in my code quite a bit to separate out repeated code into reusable functions, so there are a
-					lot of functions in the grid component.  The cells wrap around as opposed to just stopping at the edge.</p>
+					I went back and forth in my code quite a bit to separate out repeated code into reusable functions,
+					so there are a lot of functions in the grid component. The cells wrap around as opposed to just
+					stopping at the edge.
+				</p>
 				<h2>Day 4: Thursday</h2>
-				<p>Today, I will add comments and attempt to do a 3D version as well as deploy.  Aside from deploying, I believe I've hit MVP and stretch.  </p>
-				<h2>Day 5: Friday</h2>
-				<p></p>
+				<p>
+					I added comments to describe what each function does in the grid component and fixed a speed issue I
+					was having; the speed wasn't toggling correctly and one of the speed settings was way too fast, so I
+					had to adjust the function attached to the toggle-speed button which solved both of these issues.  I added a link to the project's GitHub repo.  I did some research and decided not to spend time on the 3D stuff.  I'd love to do it, but I have other things with a higher priority.
+				</p>
+				<p>
+					Last, I deployed to both Heroku pages and a subfolder of my company's website since that is a stretch item.
+				</p>
 			</Div2>
 		</div>
 	);

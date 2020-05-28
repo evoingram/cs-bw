@@ -46,7 +46,14 @@ class GButtons extends React.Component {
 					<Button id="GB1" onClick={this.props.togglePlay}>
 						<H4>{this.props.buttonText}</H4>
 					</Button>
-					<Button id="GB2" onClick={this.props.toggleSpeed}>
+					<Button id="GB2" onClick={e => {
+						let speed;
+						if (this.props.generationSpeed === 200) {speed = 100;}
+						else if (this.props.generationSpeed === 100) {speed = 400;}
+						else {speed = 200;}
+						this.props.toggleSpeed(speed);
+						console.log(speed);
+					}}>
 						<H4>{this.props.buttonTextSpeed}</H4>
 					</Button>
 					<Button id="GB3" onClick={this.props.advanceByGeneration}>
@@ -88,9 +95,6 @@ class GButtons extends React.Component {
 				<Div>
 					<Button id="PS4" onClick={this.props.generateRandomShape}>
 						<H4>Random</H4>
-					</Button>
-					<Button id="PS5">
-						<H4>3D Version</H4>
 					</Button>
 					<Button id="GB3" onClick={this.props.setToDefault}>
 						<H4>Clear</H4>

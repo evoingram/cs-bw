@@ -60,6 +60,7 @@ class Game extends React.Component {
 		};
 	}
 
+	// function to draw initial canvas
 	drawCanvas = () => {
 		let canvas = this.refs.canvas;
 		let cContext = canvas.getContext('2d');
@@ -79,6 +80,7 @@ class Game extends React.Component {
 		cContext.stroke();
 	};
 
+	// set cell color as #4E8A63 (green) for live color
 	setLive = (cContext, x, y) => {
 		cContext.fillStyle = '#4E8A63';
 		cContext.fillRect(
@@ -89,6 +91,7 @@ class Game extends React.Component {
 		);
 	};
 
+	// set cell color as #2958AA (blue) for dead color
 	setDead = (cContext, x, y) => {
 		cContext.fillStyle = '#2958AA';
 		cContext.fillRect(
@@ -99,6 +102,7 @@ class Game extends React.Component {
 		);
 	};
 
+	// loop to color cells as live or dead
 	colorCells = () => {
 		const canvas = this.refs.canvas;
 		const cContext = canvas.getContext('2d');
@@ -113,6 +117,7 @@ class Game extends React.Component {
 		}
 	};
 
+	// toggle play button text between 'play' and 'stop
 	toggleButtonText = () => {
 		if (this.state.buttonText === 'Play') {
 			this.setState({ buttonText: 'Stop' });
@@ -121,6 +126,7 @@ class Game extends React.Component {
 		}
 	};
 
+	// function to toggle speed button text among 'fast', 'faster', and 'fastest'
 	toggleButtonTextSpeed = () => {
 		if (this.state.buttonTextSpeed === 'Fast') {
 			this.setState({ buttonTextSpeed: 'Faster' });
@@ -131,6 +137,7 @@ class Game extends React.Component {
 		}
 	};
 
+	// function to cycle animation on time interval
 	aFRTime = () => {
 		animationFrameRequest = requestAnimationFrame(timestamp => {
 			animationInterval = setTimeout(() => {
@@ -139,6 +146,7 @@ class Game extends React.Component {
 		});
 	};
 
+	// function to play game of life according to user's desired settings
 	togglePlay = () => {
 		if (this.state.nextAnimation === true) {
 			this.setState({ nextAnimation: false });
@@ -151,6 +159,7 @@ class Game extends React.Component {
 		this.toggleButtonText();
 	};
 
+	// function to set grid to default state 
 	setToDefault = () => {
 		for (let i = 0; i < this.state.cellQuantityY; i++) {
 			gridRound1[i] = gridDefault[i].slice();
@@ -161,6 +170,7 @@ class Game extends React.Component {
 		currentGeneration = 1;
 	};
 
+	// function to increment speed
 	toggleSpeed = currentSpeed => {
 		generationSpeed = currentSpeed;
 
@@ -177,6 +187,7 @@ class Game extends React.Component {
 		this.toggleButtonTextSpeed();
 	};
 
+	// function to toggle grid size between 'small' (25 boxes) and 'medium' (50 boxes)
 	toggleGridSize = size => {
 		if (size === 'small') {
 			this.setState({ currentGrid: smallDefault });
@@ -186,7 +197,6 @@ class Game extends React.Component {
 			gridRound1 = smallFirst;
 			gridRound2 = smallSecond;
 			this.selectShape('toad');
-
 		} else if (size === 'medium') {
 			this.setState({ currentGrid: mediumDefault });
 			this.setState({ boardSize: 'medium', singleCellLength: 15, cellQuantityX: 50, cellQuantityY: 50 });
@@ -202,6 +212,7 @@ class Game extends React.Component {
 		setTimeout(() => this.drawCanvas(), 10);
 	};
 
+	// function to run after clicking on canvas; calculate and set state & global variables
 	clickCanvas = event => {
 		let canvas = this.refs.canvas;
 		let rectangle = canvas.getBoundingClientRect();
@@ -218,6 +229,7 @@ class Game extends React.Component {
 		}
 	};
 
+	// function to generate random shape 
 	generateRandomShape = () => {
 		if (!this.state.nextAnimation) {
 			for (let y = 0; y < this.state.cellQuantityY; y++) {
@@ -228,7 +240,7 @@ class Game extends React.Component {
 			this.setState({ currentGrid: gridRound1 });
 		}
 	};
-
+	// function to load selected shape in selected size
 	loadShape = (loadedShape, size) => {
 		for (let x = 0; x < size; x++) {
 			gridRound1[x] = loadedShape[x].slice();
@@ -236,6 +248,7 @@ class Game extends React.Component {
 		this.setState({ currentGrid: gridRound1 });
 	};
 
+	// function for conditional shape selection (runs previous function based on conditionals)
 	selectShape = newShape => {
 		this.setState({ shape: newShape });
 		if (newShape === 'beacon') {
@@ -250,8 +263,8 @@ class Game extends React.Component {
 			this.loadShape(pulsar, 50);
 		}
 	};
-
-	wrapCells = (x, y) => { 
+	// function to wrap cells as game plays out
+	wrapCells = (x, y) => {
 		previousRow = x - 1;
 		if (previousRow === -1) {
 			previousRow = this.state.cellQuantityY - 1;
@@ -268,9 +281,10 @@ class Game extends React.Component {
 		if (nextColumn === this.state.cellQuantityX) {
 			nextColumn = 0;
 		}
-	}
+	};
 
-	countNeighbors = (x, y, gridRound) => { 
+	// function to count all live neighbors of a cell 
+	countNeighbors = (x, y, gridRound) => {
 		count = 0;
 		if (gridRound[previousRow][previousColumn]) {
 			count++;
@@ -296,9 +310,10 @@ class Game extends React.Component {
 		if (gridRound[nextRow][nextColumn]) {
 			count++;
 		}
-	}
-	toggleStateNeighbors = (x, y, gridComparisonIf, gridComparisonChanged) => { 
+	};
 
+	// function to toggle state of neighbors per rules of CGOL
+	toggleStateNeighbors = (x, y, gridComparisonIf, gridComparisonChanged) => {
 		if (gridComparisonIf[x][y] === 1 && count < 2) {
 			gridComparisonChanged[x][y] = 0;
 		} else if (gridComparisonIf[x][y] === 1 && (count === 2 || count === 3)) {
@@ -310,83 +325,67 @@ class Game extends React.Component {
 		} else if (gridComparisonIf[x][y] === 0 && count !== 3) {
 			gridComparisonChanged[x][y] = 0;
 		}
-
-
-	}
-
+	};
+	// function to advance CGOL one generation at a time
 	advanceByGeneration = () => {
 		if (this.state.currentCycle === true) {
+			this.aFRTime();
+			this.colorCells();
 
-				this.aFRTime();
-				this.colorCells();
+			// create next buffer
+			for (let i = 0; i < this.state.cellQuantityY; i++) {
+				for (let j = 0; j <= this.state.cellQuantityX; j++) {
+					// wrap
+					this.wrapCells(i, j);
 
-				// create next buffer
-				for (let i = 0; i < this.state.cellQuantityY; i++) {
+					// count live neighbors
+					this.countNeighbors(i, j, gridRound1);
 
-					for (let j = 0; j <= this.state.cellQuantityX; j++) {
-
-						// wrap
-						this.wrapCells(i, j);
-
-						// count live neighbors
-						this.countNeighbors(i, j, gridRound1);
-
-						// check neighbors to toggle state
-						this.toggleStateNeighbors(i, j, gridRound1, gridRound2); 
-
-					}
+					// check neighbors to toggle state
+					this.toggleStateNeighbors(i, j, gridRound1, gridRound2);
 				}
-				this.setState({ currentGrid: gridRound2 });
-				this.setState({ currentCycle: false });
-				currentGeneration++;
+			}
+			this.setState({ currentGrid: gridRound2 });
+			this.setState({ currentCycle: false });
+			currentGeneration++;
 		} else {
-				this.aFRTime();
-				this.colorCells();
+			this.aFRTime();
+			this.colorCells();
 
-				// create next buffer
-				for (let i = 0; i < this.state.cellQuantityY; i++) {
-					for (let j = 0; j <= this.state.cellQuantityX; j++) {
+			// create next buffer
+			for (let i = 0; i < this.state.cellQuantityY; i++) {
+				for (let j = 0; j <= this.state.cellQuantityX; j++) {
+					// wrap
+					this.wrapCells(i, j);
 
-						// wrap
-						this.wrapCells(i, j);
+					// count live neighbors
+					this.countNeighbors(i, j, gridRound2);
 
-						// count live neighbors
-						this.countNeighbors(i, j, gridRound2);
-
-						// check neighbors to toggle state
-						this.toggleStateNeighbors(i, j, gridRound2, gridRound1); 
-
-					}
+					// check neighbors to toggle state
+					this.toggleStateNeighbors(i, j, gridRound2, gridRound1);
 				}
-				this.setState({ currentGrid: gridRound1 });
-				this.setState({ currentCycle: true });
-				currentGeneration++;
-
+			}
+			this.setState({ currentGrid: gridRound1 });
+			this.setState({ currentCycle: true });
+			currentGeneration++;
 		}
-	}
+	};
 
+	// 'main' function to tie everything together
+	// creates buffer, loads next grid as current, changes cycle, adds to generation count, cancels as appropriate
 	onAnimFrame = timestamp => {
-		
 		if (this.state.currentCycle === true) {
 			if (this.state.nextAnimation === true) {
-
 				this.aFRTime();
 				this.colorCells();
 
 				// create next buffer
 				for (let i = 0; i < this.state.cellQuantityY; i++) {
-
 					for (let j = 0; j <= this.state.cellQuantityX; j++) {
-
-						// wrap
+						
 						this.wrapCells(i, j);
-
-						// count live neighbors
 						this.countNeighbors(i, j, gridRound1);
-
-						// check neighbors to toggle state
-						this.toggleStateNeighbors(i, j, gridRound1, gridRound2); 
-
+						this.toggleStateNeighbors(i, j, gridRound1, gridRound2);
 					}
 				}
 				this.setState({ currentGrid: gridRound2 });
@@ -403,22 +402,15 @@ class Game extends React.Component {
 				// create next buffer
 				for (let i = 0; i < this.state.cellQuantityY; i++) {
 					for (let j = 0; j <= this.state.cellQuantityX; j++) {
-
-						// wrap
+						
 						this.wrapCells(i, j);
-
-						// count live neighbors
 						this.countNeighbors(i, j, gridRound2);
-
-						// check neighbors to toggle state
-						this.toggleStateNeighbors(i, j, gridRound2, gridRound1); 
-
+						this.toggleStateNeighbors(i, j, gridRound2, gridRound1);
 					}
 				}
 				this.setState({ currentGrid: gridRound1 });
 				this.setState({ currentCycle: true });
 				currentGeneration++;
-
 			} else {
 				cancelAnimationFrame(animationFrameRequest);
 			}
@@ -436,7 +428,6 @@ class Game extends React.Component {
 		}
 	};
 
-
 	render() {
 		return (
 			<Div>
@@ -450,10 +441,11 @@ class Game extends React.Component {
 					/>
 				</div>
 				<div>
-					<center>
+					<Div1>
 						<h1>Generation {currentGeneration}</h1>
-					</center>
+					</Div1>
 					<GButtons
+						generationSpeed={this.state.generationSpeed}
 						buttonText={this.state.buttonText}
 						buttonTextSpeed={this.state.buttonTextSpeed}
 						boardSize={this.state.boardSize}
