@@ -6,9 +6,9 @@ This was a solo project.
 
 ## Project Description
 
-Conway's Game of Life Developed for Computer Science, Unit 1 Build Week, capstone project of unit 1.
-###[Deployed Project Link 1](https://cs-bw.now.sh/)   |   [Deployed Project Link 2](https://www.aquoco.co/erica-ingram/cgol/index.html)
+### [Deployed Project Link 1](https://cs-bw.now.sh/)   |   [Deployed Project Link 2](https://www.aquoco.co/erica-ingram/cgol/index.html)
 
+Conway's Game of Life Developed for Computer Science, Unit 1 Build Week, capstone project of unit 1.
 ## Key Features
 
 - Live solo project
