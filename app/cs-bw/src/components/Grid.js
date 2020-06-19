@@ -197,6 +197,7 @@ class Game extends React.Component {
 			gridRound1 = smallFirst;
 			gridRound2 = smallSecond;
 			this.selectShape('toad');
+
 		} else if (size === 'medium') {
 			this.setState({ currentGrid: mediumDefault });
 			this.setState({ boardSize: 'medium', singleCellLength: 15, cellQuantityX: 50, cellQuantityY: 50 });
@@ -240,6 +241,7 @@ class Game extends React.Component {
 			this.setState({ currentGrid: gridRound1 });
 		}
 	};
+
 	// function to load selected shape in selected size
 	loadShape = (loadedShape, size) => {
 		for (let x = 0; x < size; x++) {
@@ -263,6 +265,7 @@ class Game extends React.Component {
 			this.loadShape(pulsar, 50);
 		}
 	};
+
 	// function to wrap cells as game plays out
 	wrapCells = (x, y) => {
 		previousRow = x - 1;
