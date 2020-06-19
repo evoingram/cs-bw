@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Blog from './Blog';
 import About from './About';
 
-
 const Div = styled.div`
 	justify-content: center;
 	text-align: center;

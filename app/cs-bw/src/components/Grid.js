@@ -83,23 +83,11 @@ class Game extends React.Component {
 	// set cell color as #4E8A63 (green) for live color
 	setLive = (cContext, x, y) => {
 		cContext.fillStyle = '#4E8A63';
-		cContext.fillRect(
-			y * this.state.singleCellLength + 1,
-			x * this.state.singleCellLength + 1,
-			this.state.singleCellLength - 1,
-			this.state.singleCellLength - 1
-		);
 	};
 
 	// set cell color as #2958AA (blue) for dead color
 	setDead = (cContext, x, y) => {
 		cContext.fillStyle = '#2958AA';
-		cContext.fillRect(
-			y * this.state.singleCellLength + 1,
-			x * this.state.singleCellLength + 1,
-			this.state.singleCellLength - 1,
-			this.state.singleCellLength - 1
-		);
 	};
 
 	// loop to color cells as live or dead
@@ -113,6 +101,12 @@ class Game extends React.Component {
 				} else {
 					this.setDead(cContext, x, y);
 				}
+				cContext.fillRect(
+					y * this.state.singleCellLength + 1,
+					x * this.state.singleCellLength + 1,
+					this.state.singleCellLength - 1,
+					this.state.singleCellLength - 1
+				);
 			}
 		}
 	};
