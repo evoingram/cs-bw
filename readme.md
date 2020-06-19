@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/7f43b7af335091b3e81b/maintainability)](https://codeclimate.com/github/evoingram/cs-bw/maintainability)
+
 # Conway's Game of Life Product Overview
 
 ## My Role
